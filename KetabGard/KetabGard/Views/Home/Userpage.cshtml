@@ -1,0 +1,48 @@
+﻿<div class="row">
+    <div class="col-10 p-5">
+        <div class="row m-3 ms-0 me-0 rounded-3 ps-0 pe-0 border border-2 border-secondary">
+            <div class="col-1 m-0 p-2 pe-3 text-end">
+                <img src="~/Source/Searchicon.png" />
+            </div>
+            <input id="searchbox" class="col-10 rounded-2 me0 pe-0" placeholder="جستجو کنید" style="border:0" />
+        </div>
+        <div class="row mt-5">
+            <div class="col-10">
+                <label class="h5 mt-2 me-3"><b>اعضا</b></label>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-success" onclick="Adduserloadpage()">
+                    <img class="mb-1 ms-1" src="~/Source/AddUser.png" />
+                    افزودن عضو
+                </button>
+            </div>
+        </div>
+        <div class="mb-3 me-2">
+            <button type="button" id="alluser" onclick="selectedtypeofusers($('#alluser'),1)" class="btn disabled button-36 rounded-0">همه</button>
+            <button type="button" id="activeuser" onclick="selectedtypeofusers($('#activeuser'),2)" class="btn rounded-0 button-35">اعضای فعال</button>
+            <button type="button" id="deactiveuser" onclick="selectedtypeofusers($('#deactiveuser'),3)" class="btn rounded-0 button-35">اعضای غیرفعال</button>
+        </div>
+        <div id="divusertable">
+            
+        </div>
+    </div>
+    <div class="col-2 ps-0">
+        <div class="p-5 ps-0">
+            <div class="m-3 mt-4 ms-0 me-0 ps-0 pe-0">
+                <label>12 اردیبهشت 1403</label>
+            </div>
+        </div>
+        <div class="rounded-4" style="background-color:rgba(30,30,30,0.1); height:auto">
+            <div class="p-3 pb-0 pt-2">
+                <label class="h5" style="color:black">جنسیت</label>
+            </div>
+            <div class="p-2 text-center">
+                <img class="w-75" src="~/Source/Sex.png" />
+            </div>
+            <div class="pe-2">
+                <label class="ms-3">مرد <b style="color: #757DEB ">&#x2022;</b></label>
+                <label>زن <b style="color: #F47072">&#x2022;</b></label>
+            </div>
+        </div>
+    </div>
+</div>

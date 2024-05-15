@@ -1,0 +1,99 @@
+﻿@section styles {
+    <style>
+        #searchbox:focus {
+            outline: none
+        }
+        .button-35:hover {
+            border-bottom: 2px solid #525CEB
+        }
+        .button-35:active {
+            color: #525CEB;
+            border-bottom: 2px solid #525CEB;
+        }
+        .button-36 {
+            color: #525CEB;
+            border-bottom: 2px solid #525CEB;
+            cursor: not-allowed;
+        }
+        .button-36:hover {
+            color: #525CEB;
+            border-bottom: 2px solid #525CEB;
+            cursor: not-allowed;
+        }
+        .button-36:active {
+            color: #525CEB;
+            border-bottom: 2px solid #525CEB;
+        }
+        .btn.disabled {
+            color: #525CEB;
+            border-top : none;
+            border-right: none;
+            border-left : none;
+            border-color : none;
+            opacity: 1;
+        }
+        .btn {
+            border-top: none;
+            border-right: none;
+            border-left: none;
+        }
+    </style>
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadUserpage();
+        });
+    </script>
+}
+<div class="col-md-2 bgcustom">
+    <div class="mt-5 mb-4 text-center">
+        <img class="w-50" src="~/Source/Logo.png" />
+    </div>
+    <div class="mb-5" style="background-color:rgba()">
+        <div class="row me-3 mb-2 ms-4 mt-1 rounded-4 cursor bg-primary" id="Dashboard" onclick="selectedmenu($('#Dashboard'),$('#imgdashboard'),$('#txtdashboard'),0)">
+            <img class="w-25 pe-3 pt-3 pb-3" id="imgdashboard" src="~/Source/SelectedDashboard.png" sizes="20px" />
+            <label class="w-auto mt-2 pt-2 text-white cursor" id="txtdashboard">داشبورد</label>
+        </div>
+        <div class="row me-3 mb-2 ms-4 mt-1 rounded-4 cursor" id="User" onclick="selectedmenu($('#User'),$('#imgUser'),$('#txtUser'),1)">
+            <img class="w-25 pe-3 pt-3 pb-3" id="imgUser" src="~/Source/User.png" sizes="20px" />
+            <label class="w-auto mt-2 pt-1 text-secondary cursor" id="txtUser">اعضا</label>
+        </div>
+        <div class="row me-3 mb-2 ms-4 mt-1 rounded-4 cursor" id="Books" onclick="selectedmenu($('#Books'),$('#imgBook'),$('#txtBook'),2)">
+            <img class="w-25 pe-3 pt-3 pb-3" id="imgBook" src="~/Source/Book.png" sizes="20px" />
+            <label class="w-auto mt-2 pt-2 text-secondary cursor" id="txtBook">کتاب</label>
+        </div>
+        <div class="row me-3 mb-2 ms-4 mt-1 rounded-4 cursor" id="Amanat" onclick="selectedmenu($('#Amanat'),$('#imgAmanat'),$('#txtAmanat'),3)">
+            <img class="w-25 pe-3 pt-3 pb-3" id="imgAmanat" src="~/Source/Amanat.png" sizes="20px" />
+            <label class="w-auto mt-2 pt-1 text-secondary cursor" id="txtAmanat">امانتی</label>
+        </div>
+    </div>
+    <div class="mt-5 pt-2">
+        <div class="bg-secondary rounded-3 row pt-1 pb-1 pe-3 ps-3 m-4">
+            <div class="col-3 p-0 pe-1">
+                <img class=" w-75 rounded-circle" src="~/AdminPic/Me.jpg" />
+            </div>
+            <div class="col-8 p-0 me-2">
+                <label class="text-white">مهدی دهقان</label>
+            </div>
+        </div>
+        <div class="border border-secondary rounded-3 row pt-1 pb-1 pe-3 ps-3 m-4 cursor" id="divAddAdmin" onclick="SelectedAddadmin($('#divAddAdmin'),true)">
+            <div class="col-3 pe-1">
+                <img class=" w-75" src="~/Source/AdminAdd.png" />
+            </div>
+            <div class="col-8 p-0 me-2">
+                <label class="text-secondary cursor">اضافه کردن مدیر</label>
+            </div>
+        </div>
+        <div class="border border-danger rounded-3 row pt-1 pb-1 pe-3 ps-3 m-4 cursor">
+            <div class="col-3 pe-1">
+                <img class=" w-75" src="~/Source/Exit.png" />
+            </div>
+            <div class="col-8 p-0 me-2">
+                <label class="text-danger cursor">خروج</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="loadpartial" class="col-md-9">
+</div>

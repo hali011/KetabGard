@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KetabGard</title>
+    @Styles.Render("~/Content/css")
+    <style>
+        body {
+            direction: rtl;
+            font-family: 'iranian sans';
+        }
+
+        .bgcustom {
+            margin: 10px;
+            background: rgba(249, 232, 217, .5);
+            border-radius: 5px 30px 30px 5px;
+        }
+
+        .cursor {
+            cursor: pointer
+        }
+    </style>
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script> // for index
+        function defultmenu(object) {
+            for (let x in object) {
+                switch (object[x].id) {
+                    case 0:
+                        object[x].undivtag.removeClass("bg-primary");
+                        object[x].untxttag.removeClass("text-white").addClass("text-secondary");
+                        object[x].unimgtag.attr("src", "/Source/Dashboard.png");
+                        break;
+                    case 1:
+                        object[x].undivtag.removeClass("bg-primary");
+                        object[x].untxttag.removeClass("text-white").addClass("text-secondary");
+                        object[x].unimgtag.attr("src", "/Source/User.png");
+                        break;
+                    case 2:
+                        object[x].undivtag.removeClass("bg-primary");
+                        object[x].untxttag.removeClass("text-white").addClass("text-secondary");
+                        object[x].unimgtag.attr("src", "/Source/Book.png");
+                        break;
+                    case 3:
+                        object[x].undivtag.removeClass("bg-primary");
+                        object[x].untxttag.removeClass("text-white").addClass("text-secondary");
+                        object[x].unimgtag.attr("src", "/Source/Amanat.png");
+                        break;
+                }
+            }
+        }
+        function selectedmenu(divtag, imgtag, txttag, x) {
+            let notselected = [];
+            switch (x) {
+                case 0:
+                    divtag.addClass("bg-primary");
+                    txttag.removeClass("text-secondary").addClass("text-white");
+                    imgtag.attr("src", "/Source/SelectedDashboard.png");
+                    notselected = [
+                        { undivtag: $('#User'), unimgtag: $('#imgUser'), untxttag: $('#txtUser'), id: 1 },
+                        { undivtag: $('#Books'), unimgtag: $('#imgBook'), untxttag: $('#txtBook'), id: 2 },
+                        { undivtag: $('#Amanat'), unimgtag: $('#imgAmanat'), untxttag: $('#txtAmanat'), id: 3 }
+                    ]
+                    defultmenu(notselected)
+                    SelectedAddadmin($('#divAddAdmin'), false)
+                    loadpage(x)
+                    break;
+                case 1:
+                    divtag.addClass("bg-primary");
+                    txttag.removeClass("text-secondary").addClass("text-white");
+                    imgtag.attr("src", "/Source/SelectedUser.png");
+                    notselected = [
+                        { undivtag: $('#Dashboard'), unimgtag: $('#imgdashboard'), untxttag: $('#txtdashboard'), id: 0 },
+                        { undivtag: $('#Books'), unimgtag: $('#imgBook'), untxttag: $('#txtBook'), id: 2 },
+                        { undivtag: $('#Amanat'), unimgtag: $('#imgAmanat'), untxttag: $('#txtAmanat'), id: 3 }
+                    ]
+                    defultmenu(notselected)
+                    SelectedAddadmin($('#divAddAdmin'), false)
+                    loadpage(x)
+                    break;
+                case 2:
+                    divtag.addClass("bg-primary");
+                    txttag.removeClass("text-secondary").addClass("text-white");
+                    imgtag.attr("src", "/Source/SelectedBook.png");
+                    notselected = [
+                        { undivtag: $('#Dashboard'), unimgtag: $('#imgdashboard'), untxttag: $('#txtdashboard'), id: 0 },
+                        { undivtag: $('#User'), unimgtag: $('#imgUser'), untxttag: $('#txtUser'), id: 1 },
+                        { undivtag: $('#Amanat'), unimgtag: $('#imgAmanat'), untxttag: $('#txtAmanat'), id: 3 }
+                    ]
+                    defultmenu(notselected)
+                    SelectedAddadmin($('#divAddAdmin'), false)
+                    loadpage(x)
+                    break;
+                case 3:
+                    divtag.addClass("bg-primary");
+                    txttag.removeClass("text-secondary");
+                    txttag.addClass("text-white");
+                    imgtag.attr("src", "/Source/SelectedAmanati.png");
+                    notselected = [
+                        { undivtag: $('#Dashboard'), unimgtag: $('#imgdashboard'), untxttag: $('#txtdashboard'), id: 0 },
+                        { undivtag: $('#User'), unimgtag: $('#imgUser'), untxttag: $('#txtUser'), id: 1 },
+                        { undivtag: $('#Books'), unimgtag: $('#imgBook'), untxttag: $('#txtBook'), id: 2 }
+                    ]
+                    defultmenu(notselected)
+                    SelectedAddadmin($('#divAddAdmin'), false)
+                    loadpage(x)
+                    break;
+            }
+        }
+
+        function SelectedAddadmin(divaddAdmin, selected) {
+            if (selected) {
+                let notselected = [
+                    { undivtag: $('#Dashboard'), unimgtag: $('#imgdashboard'), untxttag: $('#txtdashboard'), id: 0 },
+                    { undivtag: $('#User'), unimgtag: $('#imgUser'), untxttag: $('#txtUser'), id: 1 },
+                    { undivtag: $('#Books'), unimgtag: $('#imgBook'), untxttag: $('#txtBook'), id: 2 },
+                    { undivtag: $('#Amanat'), unimgtag: $('#imgAmanat'), untxttag: $('#txtAmanat'), id: 3 }
+                ]
+                defultmenu(notselected)
+                divaddAdmin.css("background-color", "rgba(30,30,30,0.2)")
+                let x = 4
+                loadpage(x)
+            } else {
+                divaddAdmin.css("background-color", "")
+            }
+        }
+
+        function loadpage(number) {
+            switch (number) {
+                case 0:
+                    loadDashboard()
+                    break;
+                case 1:
+                    loadUserpage()
+                    break;
+                case 2:
+                    loadBookpage()
+                    break;
+                case 3:
+                    loadAmanatpage()
+                    break;
+                case 4:
+                    loadAddadminpage()
+                    break;
+            }
+        }
+
+        function loadDashboard() {
+            fetch('/Home/Dashboard', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify({id:1})
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+        function loadUserpage() {
+            fetch('/Home/Userpage', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 1 })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                    loadusers(0);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+        function loadBookpage() {
+            fetch('/Home/Bookpage', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 1 })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+        function loadAmanatpage() {
+            fetch('/Home/Amanatpage',{
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 1 })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+        function loadAddadminpage() {
+            fetch('/Home/Addadminpage', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 1 })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+    </script>
+    <script> //for userpage 
+        function defultselecteduser(object) {
+            for (let x in object) {
+                object[x].unselectedbtn.removeClass("button-36").removeClass("disabled").addClass("button-35");
+            }
+        }
+        function selectedtypeofusers(btnselected, id) {
+            let unselected = []
+            switch (id) {
+                case 1:
+                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
+                    loadusers(0);
+                    unselected = [
+                        { unselectedbtn: $("#activeuser"), id: 2 },
+                        { unselectedbtn: $("#deactiveuser"), id: 3 }
+                    ]
+                    defultselecteduser(unselected)
+                    break;
+                case 2:
+                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
+                    loadusers(1);
+                    unselected = [
+                        { unselectedbtn: $("#alluser"), id: 1 },
+                        { unselectedbtn: $("#deactiveuser"), id: 3 }
+                    ]
+                    defultselecteduser(unselected)
+                    break;
+                case 3:
+                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
+                    loadusers(2)
+                    unselected = [
+                        { unselectedbtn: $("#alluser"), id: 1 },
+                        { unselectedbtn: $("#activeuser"), id: 2 }
+                    ]
+                    defultselecteduser(unselected)
+                    break;
+            }
+        }
+        function loadusers(x) {
+            switch (x) {
+                case 0:
+                    fetch('/Home/UsersTypeTable', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: x })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            $("#divusertable").html(data);
+                        })
+                        .catch(error => {
+                            alert("Error")
+                        })
+                    break;
+                case 1:
+                    fetch('/Home/UsersTypeTable', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: x })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            $("#divusertable").html(data);
+                        })
+                        .catch(error => {
+                            alert("Error")
+                        })
+                    break;
+                case 2:
+                    fetch('/Home/UsersTypeTable', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: x })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            $("#divusertable").html(data);
+                        })
+                        .catch(error => {
+                            alert("Error")
+                        })
+                    break;
+            }
+        }
+        function Adduserloadpage() {
+            fetch('/Home/Adduserpage', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 1 })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="row">
+        @RenderBody()
+    </div>
+</body>
+</html>
