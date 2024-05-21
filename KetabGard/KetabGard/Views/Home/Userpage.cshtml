@@ -7,14 +7,12 @@
             <input id="searchbox" class="col-10 rounded-2 me0 pe-0" placeholder="جستجو کنید" style="border:0" />
         </div>
         <div class="row mt-5">
-            <div class="col-10">
-                <label class="h5 mt-2 me-3"><b>اعضا</b></label>
-            </div>
             <div class="col-2">
-                <button class="btn btn-success" onclick="Adduserloadpage()">
-                    <img class="mb-1 ms-1" src="~/Source/AddUser.png" />
-                    افزودن عضو
-                </button>
+                <label class="h5"><b>اعضا</b></label>
+            </div>
+            <div class="col-8"></div>
+            <div class="col-2">
+                <img class="cursor" src="~/Source/AddUser.png" onclick="Adduserloadpage()" />
             </div>
         </div>
         <div class="mb-3 me-2">
@@ -29,7 +27,7 @@
     <div class="col-2 ps-0">
         <div class="p-5 ps-0">
             <div class="m-3 mt-4 ms-0 me-0 ps-0 pe-0">
-                <label>12 اردیبهشت 1403</label>
+                <label id="nowdate"></label>
             </div>
         </div>
         <div class="rounded-4" style="background-color:rgba(30,30,30,0.1); height:auto">

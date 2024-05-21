@@ -1,0 +1,53 @@
+﻿<div class="row">
+    <div class="col-10 pe-5 pt-5 mt-5">
+        <div>
+            <label class="h3"><b>افزودن عضو</b></label>
+        </div>
+        <div class="row mt-5">
+            <div class="col-3 ms-5">
+                <input type="file" onchange="loadnewpic(event,2)" id="imgupload" hidden />
+                <button hidden id="OpenImgUpload">Image Upload</button>
+                <img class="cursor rounded-4" id="addbookpic" onclick="uploadpicture()" width="164" height="164"  src="~/Source/AddPicture.png" />
+            </div>
+            <div class="col-7 row p-5 me-5 pe-5">
+                <div class="col-3"></div>
+                <div class=" col-3">
+                    <img class="cursor" src="~/Source/Save.png" />
+                </div>
+                <div class="col-3 me-3">
+                    <img class="cursor" onclick="cancelnewbook()" src="~/Source/cancel.png" />
+                </div>
+            </div>
+        </div>
+        <div class="pe-1 mt-4">
+            <div class="row">
+                <div class="col-3">
+                    <input class="rounded-3 form-control" placeholder="نام کتاب" />
+                </div>
+                <div class="col-3">
+                    <input class="rounded-3 form-control" placeholder="نام نویسنده" />
+                </div>
+                <div class="col-3">
+                    <input class="form-control rounded-2" placeholder="نام دسته بندی جدید" id="newgenreinput" />
+                    <select id="genreselect" class="form-select">
+                        <option value="0" disabled selected>دسته بندی</option>
+                        <option value="1">انگیزشی</option>
+                        <option value="2" onclick="newgenre()">دسته جدید</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-danger" onclick="cancelnewgenrebtn()" id="cancelnewgenre">لغو</button>
+                </div>
+            </div>
+            <div class="row mt-4 mb-4">
+                <div class="col-3">
+                    <input class="rounded-3 form-control" placeholder="سال انتشار" />
+                </div>
+                <div class="col-3">
+                    <input class="rounded-3 form-control" placeholder="تعداد صفحه" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>

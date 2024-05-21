@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KetabGardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KetabGard.dbo.Books' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Writer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Editor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Translator" Type="nvarchar" MaxLength="50" />
+          <Property Name="Genre" Type="int" />
+          <Property Name="YearofPublication" Type="nvarchar" MaxLength="50" />
+          <Property Name="GetCount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Here" Type="bit" />
+          <Property Name="Row" Type="int" />
+          <Property Name="Col" Type="int" />
+          <Property Name="WhoIsGet" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="WhenBack" Type="nvarchar(max)" />
+          <Property Name="Backed" Type="bit" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="WhoGiveRate" Type="nvarchar(max)" />
+          <Property Name="Pages" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="WhoSave" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="PicURL" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KetabGard.dbo.EducationDegree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EducationDegree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KetabGard.dbo.Gender' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KetabGard.dbo.Genre' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KetabGard.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MdliCode" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="EducationDegree" Type="int" />
+          <Property Name="PicURL" Type="nvarchar(max)" />
+          <Property Name="WhoSave" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="SaveDateD" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="LastTimeComeDate" Type="nvarchar(max)" />
+          <Property Name="CountOfGet" Type="int" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Acess" Type="int" />
+          <Property Name="BookId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="WhenGiveBook" Type="nvarchar(max)" />
+          <Property Name="HowManyTimeForBook" Type="nvarchar(max)" />
+          <Property Name="LastBook" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SaveDateM" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SaveDateY" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityContainer Name="KetabGardModelStoreContainer">
+          <EntitySet Name="Books" EntityType="Self.Books" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Books].[Id] AS [Id], 
+    [Books].[Name] AS [Name], 
+    [Books].[Writer] AS [Writer], 
+    [Books].[Editor] AS [Editor], 
+    [Books].[Translator] AS [Translator], 
+    [Books].[Genre] AS [Genre], 
+    [Books].[YearofPublication] AS [YearofPublication], 
+    [Books].[GetCount] AS [GetCount], 
+    [Books].[Here] AS [Here], 
+    [Books].[Row] AS [Row], 
+    [Books].[Col] AS [Col], 
+    [Books].[WhoIsGet] AS [WhoIsGet], 
+    [Books].[WhenBack] AS [WhenBack], 
+    [Books].[Backed] AS [Backed], 
+    [Books].[Rate] AS [Rate], 
+    [Books].[WhoGiveRate] AS [WhoGiveRate], 
+    [Books].[Pages] AS [Pages], 
+    [Books].[WhoSave] AS [WhoSave], 
+    [Books].[PicURL] AS [PicURL]
+    FROM [dbo].[Books] AS [Books]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EducationDegree" EntityType="Self.EducationDegree" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EducationDegree].[Id] AS [Id], 
+    [EducationDegree].[Name] AS [Name]
+    FROM [dbo].[EducationDegree] AS [EducationDegree]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Gender" EntityType="Self.Gender" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Gender].[Id] AS [Id], 
+    [Gender].[Name] AS [Name]
+    FROM [dbo].[Gender] AS [Gender]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Genre" EntityType="Self.Genre" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Genre].[Id] AS [Id], 
+    [Genre].[Name] AS [Name]
+    FROM [dbo].[Genre] AS [Genre]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Users].[Id] AS [Id], 
+    [Users].[FirstName] AS [FirstName], 
+    [Users].[LastName] AS [LastName], 
+    [Users].[FatherName] AS [FatherName], 
+    [Users].[MdliCode] AS [MdliCode], 
+    [Users].[Email] AS [Email], 
+    [Users].[Gender] AS [Gender], 
+    [Users].[EducationDegree] AS [EducationDegree], 
+    [Users].[PicURL] AS [PicURL], 
+    [Users].[WhoSave] AS [WhoSave], 
+    [Users].[Active] AS [Active], 
+    [Users].[SaveDateD] AS [SaveDateD], 
+    [Users].[LastTimeComeDate] AS [LastTimeComeDate], 
+    [Users].[CountOfGet] AS [CountOfGet], 
+    [Users].[PhoneNumber] AS [PhoneNumber], 
+    [Users].[Acess] AS [Acess], 
+    [Users].[BookId] AS [BookId], 
+    [Users].[WhenGiveBook] AS [WhenGiveBook], 
+    [Users].[HowManyTimeForBook] AS [HowManyTimeForBook], 
+    [Users].[LastBook] AS [LastBook], 
+    [Users].[SaveDateM] AS [SaveDateM], 
+    [Users].[SaveDateY] AS [SaveDateY]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KetabGardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Writer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Editor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Translator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Genre" Type="Int32" />
+          <Property Name="YearofPublication" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GetCount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Here" Type="Boolean" />
+          <Property Name="Row" Type="Int32" />
+          <Property Name="Col" Type="Int32" />
+          <Property Name="WhoIsGet" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="WhenBack" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Backed" Type="Boolean" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="WhoGiveRate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pages" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="WhoSave" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EducationDegree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MdliCode" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="EducationDegree" Type="Int32" />
+          <Property Name="PicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WhoSave" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="SaveDateD" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LastTimeComeDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CountOfGet" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Acess" Type="Int32" />
+          <Property Name="BookId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="WhenGiveBook" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HowManyTimeForBook" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastBook" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SaveDateM" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SaveDateY" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityContainer Name="KetabGardEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="EducationDegrees" EntityType="Self.EducationDegree" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KetabGardModelStoreContainer" CdmEntityContainer="KetabGardEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="KetabGardModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="Translator" ColumnName="Translator" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="YearofPublication" ColumnName="YearofPublication" />
+                <ScalarProperty Name="GetCount" ColumnName="GetCount" />
+                <ScalarProperty Name="Here" ColumnName="Here" />
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="Col" ColumnName="Col" />
+                <ScalarProperty Name="WhoIsGet" ColumnName="WhoIsGet" />
+                <ScalarProperty Name="WhenBack" ColumnName="WhenBack" />
+                <ScalarProperty Name="Backed" ColumnName="Backed" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="WhoGiveRate" ColumnName="WhoGiveRate" />
+                <ScalarProperty Name="Pages" ColumnName="Pages" />
+                <ScalarProperty Name="WhoSave" ColumnName="WhoSave" />
+                <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducationDegrees">
+            <EntityTypeMapping TypeName="KetabGardModel.EducationDegree">
+              <MappingFragment StoreEntitySet="EducationDegree">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="KetabGardModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="KetabGardModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KetabGardModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="MdliCode" ColumnName="MdliCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="EducationDegree" ColumnName="EducationDegree" />
+                <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+                <ScalarProperty Name="WhoSave" ColumnName="WhoSave" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SaveDateD" ColumnName="SaveDateD" />
+                <ScalarProperty Name="LastTimeComeDate" ColumnName="LastTimeComeDate" />
+                <ScalarProperty Name="CountOfGet" ColumnName="CountOfGet" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Acess" ColumnName="Acess" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="WhenGiveBook" ColumnName="WhenGiveBook" />
+                <ScalarProperty Name="HowManyTimeForBook" ColumnName="HowManyTimeForBook" />
+                <ScalarProperty Name="LastBook" ColumnName="LastBook" />
+                <ScalarProperty Name="SaveDateM" ColumnName="SaveDateM" />
+                <ScalarProperty Name="SaveDateY" ColumnName="SaveDateY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

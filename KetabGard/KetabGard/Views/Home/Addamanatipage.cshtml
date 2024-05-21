@@ -1,0 +1,65 @@
+﻿<div class="pe-5">
+    <div class="row mt-5">
+            <div class="col-3 mt-5">
+                <label class="h3"><b>افزودن امانتی</b></label>
+            </div>
+            <div class="col-7 row p-5 me-5 pe-5">
+                <div class="col-3"></div>
+                <div class=" col-3">
+                    <img class="cursor" src="~/Source/Save.png" />
+                </div>
+                <div class="col-3 me-3">
+                    <img class="cursor" onclick="cancelnewamanati()" src="~/Source/cancel.png" />
+                </div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div>
+                <label class="h5"><b>کتاب</b></label>
+            </div>
+            <div>
+                <div class="row m-3 ms-0 me-0 rounded-3 ps-0 pe-0 border border-2 border-secondary">
+                    <div class="col-1 m-0 p-2 pe-3 ms-3 text-end">
+                        <img src="~/Source/Searchicon.png" />
+                    </div>
+                    <input id="bsearchbox" class="col-10 rounded-2 me0 pe-0" onkeyup="search(0,$('#bsearchbox').val())" placeholder="جست و جو کنید" style="border:0" />
+                </div>
+            </div>
+            <div>
+                <img src="~/Source/BookPicture.png" />
+            </div>
+            <div class="mt-3">
+                <input class="rounded-3 form-control" readonly placeholder="اسم کتاب" />
+                <input class="rounded-3 form-control mt-3" readonly placeholder="نام نویسنده" />
+                <input class="rounded-3 form-control mt-3" readonly placeholder="دسته بندی" />
+                <input class="rounded-3 form-control mt-3" readonly placeholder="سال انتشار" />
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <label class="h5"><b>عضو</b></label>
+            </div>
+            <div>
+                <div class="row m-3 ms-0 me-0 rounded-3 ps-0 pe-0 border border-2 border-secondary">
+                    <div class="col-1 m-0 p-2 pe-3 ms-3 text-end">
+                        <img src="~/Source/Searchicon.png" />
+                    </div>
+                    <input id="usearchbox" class="col-10 rounded-2 me0 pe-0" onkeyup="search(1,$('#usearchbox').val())" placeholder="جست و جو کنید" style="border:0" />
+                </div>
+            </div>
+            <div>
+                <img src="~/Source/UserPicture.png" />
+            </div>
+            <div class="mt-3">
+                <input class="rounded-3 form-control" readonly placeholder="نام" />
+                <input class="rounded-3 form-control mt-3" readonly placeholder="نام خانوادگی" />
+                <input class="rounded-3 form-control mt-3" readonly placeholder="کد ملی" />
+                <input class="rounded-3 form-control mt-3" readonly placeholder="شماره تماس" />
+            </div>
+        </div>
+        <div class="col-4" id="divsearchresult">
+
+        </div>
+    </div>
+</div>

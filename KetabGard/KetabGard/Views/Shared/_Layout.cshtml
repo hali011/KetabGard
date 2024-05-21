@@ -24,7 +24,9 @@
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script> // for index
+    <script src="~/Scripts/converter.js"></script>
+    <script>
+    // for index
         function defultmenu(object) {
             for (let x in object) {
                 switch (object[x].id) {
@@ -142,9 +144,58 @@
                     loadAmanatpage()
                     break;
                 case 4:
-                    loadAddadminpage()
+                    loadAdminpage()
                     break;
             }
+        }
+
+        function getdatenow() {
+            const d = new Date();
+            let gy = d.getFullYear();
+            let gm = d.getMonth() + 1;
+            let gd = d.getDate();
+            let jalalidate = gregorian_to_jalali(gy, gm, gd);
+            let datenow ;
+            let datemonth ;
+            switch (jalalidate[1]) {
+                case 1:
+                    datemonth = "فروردین"
+                    break;
+                case 2:
+                    datemonth = "اردیبهشت"
+                    break;
+                case 3:
+                    datemonth = "خرداد"
+                    break;
+                case 4:
+                    datemonth = "تیر"
+                    break;
+                case 5:
+                    datemonth = "مرداد"
+                    break;
+                case 6:
+                    datemonth = "شهریور"
+                    break;
+                case 7:
+                    datemonth = "مهر"
+                    break;
+                case 8:
+                    datemonth = "آبان"
+                    break;
+                case 9:
+                    datemonth = "آذر"
+                    break;
+                case 10:
+                    datemonth = "دی"
+                    break;
+                case 11:
+                    datemonth = "بهمن"
+                    break;
+                case 12:
+                    datemonth = "اسفند"
+                    break;
+            }
+            return datenow = jalalidate[2] + " " + datemonth + " " + jalalidate[0];
         }
 
         function loadDashboard() {
@@ -152,13 +203,15 @@
                 method: 'POST',
                 cache: 'no-cache',
                 headers: {
-                    'Content-Type' : 'application/json'
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({id:1})
+                body: JSON.stringify({ id: 1 })
             })
                 .then(response => response.text())
                 .then(data => {
                     $("#loadpartial").html(data);
+                    const datenow = getdatenow()
+                    $("#nowdate").append(datenow);
                 })
                 .catch(error => {
                     alert("Error")
@@ -177,6 +230,8 @@
                 .then(data => {
                     $("#loadpartial").html(data);
                     loadusers(0);
+                    const datenow = getdatenow()
+                    $("#nowdate").append(datenow);
                 })
                 .catch(error => {
                     alert("Error")
@@ -194,13 +249,15 @@
                 .then(response => response.text())
                 .then(data => {
                     $("#loadpartial").html(data);
+                    const datenow = getdatenow()
+                    $("#nowdate").append(datenow);
                 })
                 .catch(error => {
                     alert("Error")
                 })
         }
         function loadAmanatpage() {
-            fetch('/Home/Amanatpage',{
+            fetch('/Home/Amanatpage', {
                 method: 'POST',
                 cache: 'no-cache',
                 headers: {
@@ -211,13 +268,16 @@
                 .then(response => response.text())
                 .then(data => {
                     $("#loadpartial").html(data);
+                    loadamanatis(0);
+                    const datenow = getdatenow();
+                    $("#nowdate").append(datenow);
                 })
                 .catch(error => {
                     alert("Error")
                 })
         }
-        function loadAddadminpage() {
-            fetch('/Home/Addadminpage', {
+        function loadAdminpage() {
+            fetch('/Home/Adminpage', {
                 method: 'POST',
                 cache: 'no-cache',
                 headers: {
@@ -234,7 +294,8 @@
                 })
         }
     </script>
-    <script> //for userpage 
+    <script>
+    //for userpage
         function defultselecteduser(object) {
             for (let x in object) {
                 object[x].unselectedbtn.removeClass("button-36").removeClass("disabled").addClass("button-35");
@@ -343,6 +404,274 @@
                 .catch(error => {
                     alert("Error")
                 })
+        }
+        function cancelnewuser() {
+            loadUserpage();
+        }
+    </script>
+    <script>
+    //for bookpage
+        function Addbookloadpage() {
+            fetch('/Home/Addbookpage', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 1 })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                    $("#newgenreinput").hide();
+                    $("#cancelnewgenre").hide();
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+        function newgenre() {
+            $("#genreselect").hide();
+            $("#newgenreinput").show();
+            $("#cancelnewgenre").show();
+        }
+        function cancelnewgenrebtn() {
+            $("#genreselect").show();
+            $("#newgenreinput").hide();
+            $("#cancelnewgenre").hide();
+            $("#genreselect").val('0').change();
+        }
+        function cancelnewbook() {
+            loadBookpage()
+        }
+    </script>
+    <script>
+    // for adminpage
+        function Addadminpageload() {
+            fetch('/Home/Addadminpage', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 1 })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+        function cancelnewadmin() {
+            loadAdminpage()
+        }
+        function uploadpicture() {
+            $('#imgupload').trigger('click');
+        }
+        function loadnewpic(event, x) {
+            const fileinput = event.target;
+            if (fileinput.files.length > 0) {
+                const file = fileinput.files[0];
+                const formdata = new FormData();
+
+                let customFileName = '';
+                switch (x) {
+                    case 1:
+                        customFileName = `Admin_${Date.now()}.jpg`
+                        formdata.append('file', file, customFileName);
+                        break;
+                    case 2:
+                        customFileName = `Book_${Date.now()}.jpg`
+                        formdata.append('file', file, customFileName);
+                        formdata.append('file', file, customFileName);
+                        break;
+                    case 3:
+                        customFileName = `User_${Date.now()}.jpg`
+                        formdata.append('file', file, customFileName);
+                        formdata.append('file', file, customFileName);
+                        formdata.append('file', file, customFileName);
+                        break;
+                }
+
+
+                fetch('/Home/UploadImage', {
+                    method: 'POST',
+                    body: formdata
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            switch (x) {
+                                case 1:
+                                    $("#addadminpic").attr("src", "/AdminPic/" + customFileName);
+                                    break;
+                                case 2:
+                                    $("#addbookpic").attr("src", "/BookPic/" + customFileName);
+                                    break;
+                                case 3:
+                                    $("#adduserpic").attr("src", "/UserPic/" + customFileName);
+                                    break;
+                            }
+                        } else {
+                            alert('File upload failed');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error uploading file:', error);
+                        alert('Error uploading file');
+                    });
+            }
+        }
+    </script>
+    <script> // for amanati page
+        function selectedtypeofAmanati(btnselected, id) {
+            let unselected = []
+            switch (id) {
+                case 1:
+                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
+                    loadamanatis(0);
+                    unselected = [
+                        { unselectedbtn: $("#activeamanat"), id: 2 },
+                        { unselectedbtn: $("#deactiveamanat"), id: 3 }
+                    ]
+                    defultselecteduser(unselected)
+                    break;
+                case 2:
+                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
+                    loadamanatis(1);
+                    unselected = [
+                        { unselectedbtn: $("#allamanati"), id: 1 },
+                        { unselectedbtn: $("#deactiveamanat"), id: 3 }
+                    ]
+                    defultselecteduser(unselected)
+                    break;
+                case 3:
+                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
+                    loadamanatis(2)
+                    unselected = [
+                        { unselectedbtn: $("#allamanati"), id: 1 },
+                        { unselectedbtn: $("#activeamanat"), id: 2 }
+                    ]
+                    defultselecteduser(unselected)
+                    break;
+            }
+        }
+        function loadamanatis(x) {
+            switch (x) {
+                case 0:
+                    fetch('/Home/AmanatiTypeTable', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: x })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            $("#divamanattable").html(data);
+                        })
+                        .catch(error => {
+                            alert("Error")
+                        })
+                    break;
+                case 1:
+                    fetch('/Home/AmanatiTypeTable', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: x })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            $("#divamanattable").html(data);
+                        })
+                        .catch(error => {
+                            alert("Error")
+                        })
+                    break;
+                case 2:
+                    fetch('/Home/AmanatiTypeTable', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: x })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            $("#divamanattable").html(data);
+                        })
+                        .catch(error => {
+                            alert("Error")
+                        })
+                    break;
+            }
+        }
+        function AddAmanatiloadpage() {
+            fetch('/Home/Addamanatipage', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 1 })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#loadpartial").html(data);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+        function cancelnewamanati() {
+            loadAmanatpage();
+        }
+    </script>
+    <script> //for search
+        function search(id,str) {
+            switch (id) {
+                case 0:
+                    fetch('/Home/booksearch', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ bookname: str })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            $("#divsearchresult").html(data);
+                        })
+                        .catch(error => {
+                            alert("Error")
+                        })
+                    break;
+                case 1:
+                    fetch('/Home/usersearch', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ nameorcdm: str })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            $("#divsearchresult").html(data);
+                        })
+                        .catch(error => {
+                            alert("Error")
+                        })
+                    break;
+            }
         }
     </script>
     @RenderSection("scripts", required: false)

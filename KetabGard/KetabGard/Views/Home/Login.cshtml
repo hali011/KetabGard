@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KetabGard</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <style>
+        body {
+            direction: rtl;
+            font-family: 'iranian sans';
+        }
+    </style>
+    <script>
+        function login(user, pass) {
+            const userpass = [
+                { Username: user, Password: pass }
+            ]
+            console.log(userpass)
+            fetch('/Admin/Login', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userpass })
+            })
+                .then(response => response.text())
+                .then(data => {
+
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div class="text-center mt-3">
+            <img src="~/Source/LogoLogin.png" />
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <img style="height:35rem" src="~/Source/Loginpic.png" />
+            </div>
+            <div class="col-6">
+                <div class="p-5">
+                    <div class="p-5">
+                        <div class="ps-5 pe-5">
+                            <div class="p-3 me-5 ms-5 rounded-4" style="background-color:rgba(82,92,235,0.1)">
+                                <div class="text-center">
+                                    <label class="h3">خوش آمدید</label>
+                                </div>
+                                <div class="p-4">
+                                    <div class="mb-3">
+                                        <label>نام کاربری یا ایمیل</label>
+                                    </div>
+                                    <input id="user" class="pt-1 pb-1 pe-3 border w-100 border-2 border-secondary rounded-3" placeholder="نام کاربری یا ایمیل را وارد کنید" style="background-color: rgba(82,92,235,0)" />
+                                </div>
+                                <div class="p-4 pt-0">
+                                    <div class="mb-3">
+                                        <label>رمز عبور</label>
+                                    </div>
+                                    <input id="pass" class="pt-1 pb-1 pe-3 border w-100 border-2 border-secondary rounded-3" placeholder="رمز خود را وارد کنید" style="background-color: rgba(82,92,235,0)" />
+                                </div>
+                                <div class="p-4 pe-3 pt-0 text-center">
+                                    <img class="w-100 h-auto" style="cursor:pointer" onclick="login($('#user').val(),$('#pass').val())" src="~/Source/Loginbutten.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

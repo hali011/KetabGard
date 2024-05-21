@@ -1,1 +1,51 @@
-﻿<h1>this is amanatpage</h1>
+﻿<div class="row">
+    <div class="col-10 p-5">
+        <div class="row m-3 ms-0 me-0 rounded-3 ps-0 pe-0 border border-2 border-secondary">
+            <div class="col-1 m-0 p-2 pe-3 text-end">
+                <img src="~/Source/Searchicon.png" />
+            </div>
+            <input id="searchbox" class="col-10 rounded-2 me0 pe-0" placeholder="جستجو کنید" style="border:0" />
+        </div>
+        <div class="row mt-5">
+            <div class="col-2">
+                <label class="h5"><b>امانتی</b></label>
+            </div>
+            <div class="col-8"></div>
+            <div class="col-2">
+                <img class="cursor" src="~/Source/AddAmanati.png" onclick="AddAmanatiloadpage()" />
+            </div>
+        </div>
+        <div class="mb-3 me-2">
+            <button type="button" id="allamanati" onclick="selectedtypeofAmanati($('#allamanati'),1)" class="btn disabled button-36 rounded-0">همه</button>
+            <button type="button" id="activeamanat" onclick="selectedtypeofAmanati($('#activeamanat'),2)" class="btn rounded-0 button-35">امانتی فعال</button>
+            <button type="button" id="deactiveamanat" onclick="selectedtypeofAmanati($('#deactiveamanat'),3)" class="btn rounded-0 button-35">منقضی شده</button>
+        </div>
+        <div id="divamanattable">
+
+        </div>
+    </div>
+    <div class="col-2 ps-0">
+        <div class="p-5 ps-0">
+            <div class="m-3 mt-4 ms-0 me-0 ps-0 pe-0">
+                <label id="nowdate"></label>
+            </div>
+        </div>
+        <div class="rounded-4" style="background-color:rgba(30,30,30,0.1); height:auto">
+            <div class="p-3 pt-2">
+                <label class="h5" style="color:black"><b>اعضای برتر</b></label>
+            </div>
+            <div class="p-2 row">
+                <div class="col-2">
+                    <img class="rounded-2" width="35" height="35" src="~/AdminPic/Me.jpg" />
+                </div>
+                <div class="col-6 me-2">
+                    <label style="font-size:14px">مهدی دهقان</label>
+                    <label style="font-size:10px">1395/05/06</label>
+                </div>
+                <div class="col-2 mt-2">
+                    <label>125</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

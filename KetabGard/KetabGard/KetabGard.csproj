@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -51,6 +57,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -111,14 +119,46 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Book.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EducationDegree.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gender.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Genre.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminPic\Me.jpg" />
+    <Content Include="BookPic\BookPic.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -138,6 +178,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -167,7 +217,15 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Fonts\Iranian Sans.ttf" />
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\converter.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.js" />
@@ -180,23 +238,38 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Source\Accept.png" />
+    <Content Include="Source\AddAdmin.png" />
+    <Content Include="Source\AddAmanati.png" />
+    <Content Include="Source\AddBook.png" />
+    <Content Include="Source\AddPicture.png" />
     <Content Include="Source\AddUser.png" />
     <Content Include="Source\AdminAdd.png" />
     <Content Include="Source\Amanat.png" />
     <Content Include="Source\Amar.png" />
     <Content Include="Source\Book.png" />
+    <Content Include="Source\BookPicture.png" />
+    <Content Include="Source\cancel.png" />
     <Content Include="Source\Dashboard.png" />
+    <Content Include="Source\DelBook.png" />
     <Content Include="Source\Edit.png" />
+    <Content Include="Source\EditBook.png" />
     <Content Include="Source\Exit.png" />
+    <Content Include="Source\Loginbutten.png" />
+    <Content Include="Source\Loginpic.png" />
     <Content Include="Source\Logo.png" />
+    <Content Include="Source\LogoLogin.png" />
     <Content Include="Source\RemoveUsers.png" />
+    <Content Include="Source\Save.png" />
     <Content Include="Source\Searchicon.png" />
     <Content Include="Source\SelectedAmanati.png" />
     <Content Include="Source\SelectedBook.png" />
     <Content Include="Source\SelectedDashboard.png" />
     <Content Include="Source\SelectedUser.png" />
     <Content Include="Source\Sex.png" />
+    <Content Include="Source\SmsAlert.png" />
     <Content Include="Source\User.png" />
+    <Content Include="Source\UserPicture.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -213,17 +286,26 @@
     <Content Include="Views\Home\Userpage.cshtml" />
     <Content Include="Views\Home\Bookpage.cshtml" />
     <Content Include="Views\Home\Amanatpage.cshtml" />
-    <Content Include="Views\Home\Addadminpage.cshtml" />
+    <Content Include="Views\Home\Adminpage.cshtml" />
     <Content Include="Views\Home\UsersTypeTable.cshtml" />
     <Content Include="Views\Home\Adduserpage.cshtml" />
+    <Content Include="Views\Home\Addbookpage.cshtml" />
+    <Content Include="Views\Home\Addadminpage.cshtml" />
+    <Content Include="Views\Home\AmanatiTypeTable.cshtml" />
+    <Content Include="Views\Home\Addamanatipage.cshtml" />
+    <Content Include="Views\Home\Searchresult.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="UserPic\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

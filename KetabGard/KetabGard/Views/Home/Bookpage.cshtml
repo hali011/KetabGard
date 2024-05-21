@@ -1,1 +1,76 @@
-﻿<h1>this is bookpage</h1>
+﻿<div class="row">
+    <div class="col-10 p-5">
+        <div class="row m-3 ms-0 me-0 rounded-3 ps-0 pe-0 border border-2 border-secondary">
+            <div class="col-1 m-0 p-2 pe-3 text-end">
+                <img src="~/Source/Searchicon.png" />
+            </div>
+            <input id="searchbox" class="col-10 rounded-2 me0 pe-0" placeholder="جستجو کنید" style="border:0" />
+        </div>
+        <div class="row mt-5 mb-4">
+            <div class="col-2">
+                <label class="h5"><b>کتاب</b></label>
+            </div>
+            <div class="col-8"></div>
+            <div class="col-2">
+                <img class="cursor" src="~/Source/AddBook.png" onclick="Addbookloadpage()" />
+            </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-secondary" scope="col">کتاب</th>
+                        <th class="text-secondary" scope="col">نام نویسنده</th>
+                        <th class="text-secondary" scope="col">دسته بندی</th>
+                        <th class="text-secondary" scope="col">سال انتشار</th>
+                        <th class="text-secondary" scope="col">تعداد به امانت برده شده</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img class="float-end rounded-3" style=" height:2rem" src="~/BookPic/BookPic.png" />
+                            <label class="mt-1 me-2">عادت های اتمی</label>
+                        </td>
+                        <td class="mt-1">جیمز کلیر</td>
+                        <td class="mt-1">انگیزشی</td>
+                        <td class="mt-1">1399</td>
+                        <td class="mt-1">136</td>
+                        <td>
+                            <img class="cursor" src="~/Source/EditBook.png" />
+                        </td>
+                        <td>
+                            <img class="cursor" src="~/Source/DelBook.png" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-2 ps-0">
+        <div class="p-5 ps-0">
+            <div class="m-3 mt-4 ms-0 me-0 ps-0 pe-0">
+                <label id="nowdate"></label>
+            </div>
+        </div>
+        <div class="rounded-4" style="background-color:rgba(30,30,30,0.06);">
+            <div class="p-3 pt-2">
+                <label class="h5" style="color:black"><b>کتاب های برتر</b></label>
+            </div>
+            <div class="p-2 row">
+                <div class="col-2">
+                    <img src="~/BookPic/BookPic.png" />
+                </div>
+                <div class="col-6 me-2">
+                    <label style="font-size:14px">عادت های اتمی</label>
+                    <label style="font-size:10px">جیمز کلیر</label>
+                </div>
+                <div class="col-2 mt-2">
+                    <label>136</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
