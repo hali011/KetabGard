@@ -25,6 +25,7 @@ namespace KetabGard.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<EducationDegree> EducationDegrees { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }

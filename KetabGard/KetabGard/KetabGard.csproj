@@ -124,6 +124,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Book.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -175,19 +178,23 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="CSS\Loader.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Adminpage.js" />
+    <Content Include="Scripts\Amanatpage.js" />
+    <Content Include="Scripts\Bookpage.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -216,7 +223,12 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Fonts\Iranian Sans.ttf" />
+    <Content Include="Fonts\IRANSans%28FaNum%29.ttf" />
+    <Content Include="Fonts\IRANSans%28FaNum%29_Black.ttf" />
+    <Content Include="Fonts\IRANSans%28FaNum%29_Bold.ttf" />
+    <Content Include="Fonts\IRANSans%28FaNum%29_Light.ttf" />
+    <Content Include="Fonts\IRANSans%28FaNum%29_Medium.ttf" />
+    <Content Include="Fonts\IRANSans%28FaNum%29_UltraLight.ttf" />
     <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
@@ -226,6 +238,7 @@
     </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\converter.js" />
+    <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.js" />
@@ -237,7 +250,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Loadingpage.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Userpage.js" />
     <Content Include="Source\Accept.png" />
     <Content Include="Source\AddAdmin.png" />
     <Content Include="Source\AddAmanati.png" />
@@ -295,6 +310,7 @@
     <Content Include="Views\Home\Addamanatipage.cshtml" />
     <Content Include="Views\Home\Searchresult.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\loader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

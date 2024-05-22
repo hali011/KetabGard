@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KetabGardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lastname" Type="nvarchar(max)" />
+    <Property Name="Mcode" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phonenumber" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="EducationDegree" Type="int" />
+    <Property Name="Picurl" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Books">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Writer" Type="nvarchar" MaxLength="50" />
+    <Property Name="Editor" Type="nvarchar" MaxLength="50" />
+    <Property Name="Translator" Type="nvarchar" MaxLength="50" />
+    <Property Name="Genre" Type="int" />
+    <Property Name="YearofPublication" Type="nvarchar" MaxLength="50" />
+    <Property Name="GetCount" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Here" Type="bit" />
+    <Property Name="Row" Type="int" />
+    <Property Name="Col" Type="int" />
+    <Property Name="WhoIsGet" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="WhenBack" Type="nvarchar(max)" />
+    <Property Name="Backed" Type="bit" />
+    <Property Name="Rate" Type="int" />
+    <Property Name="WhoGiveRate" Type="nvarchar(max)" />
+    <Property Name="Pages" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="WhoSave" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="PicURL" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="EducationDegree">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MdliCode" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="EducationDegree" Type="int" />
+    <Property Name="PicURL" Type="nvarchar(max)" />
+    <Property Name="WhoSave" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="SaveDateD" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="LastTimeComeDate" Type="nvarchar(max)" />
+    <Property Name="CountOfGet" Type="int" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Acess" Type="int" />
+    <Property Name="BookId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="WhenGiveBook" Type="nvarchar(max)" />
+    <Property Name="HowManyTimeForBook" Type="nvarchar(max)" />
+    <Property Name="LastBook" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="SaveDateM" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="SaveDateY" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Expireactivate" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'KetabGard.dbo.Adduserpage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityContainer Name="KetabGardModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EducationDegree" EntityType="Self.EducationDegree" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

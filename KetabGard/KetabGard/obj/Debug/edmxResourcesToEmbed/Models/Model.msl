@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KetabGardModelStoreContainer" CdmEntityContainer="KetabGardEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="KetabGardModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Mcode" ColumnName="Mcode" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="EducationDegree" ColumnName="EducationDegree" />
+          <ScalarProperty Name="Picurl" ColumnName="Picurl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="KetabGardModel.Book">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Writer" ColumnName="Writer" />
+          <ScalarProperty Name="Editor" ColumnName="Editor" />
+          <ScalarProperty Name="Translator" ColumnName="Translator" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="YearofPublication" ColumnName="YearofPublication" />
+          <ScalarProperty Name="GetCount" ColumnName="GetCount" />
+          <ScalarProperty Name="Here" ColumnName="Here" />
+          <ScalarProperty Name="Row" ColumnName="Row" />
+          <ScalarProperty Name="Col" ColumnName="Col" />
+          <ScalarProperty Name="WhoIsGet" ColumnName="WhoIsGet" />
+          <ScalarProperty Name="WhenBack" ColumnName="WhenBack" />
+          <ScalarProperty Name="Backed" ColumnName="Backed" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="WhoGiveRate" ColumnName="WhoGiveRate" />
+          <ScalarProperty Name="Pages" ColumnName="Pages" />
+          <ScalarProperty Name="WhoSave" ColumnName="WhoSave" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EducationDegrees">
+      <EntityTypeMapping TypeName="KetabGardModel.EducationDegree">
+        <MappingFragment StoreEntitySet="EducationDegree">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="KetabGardModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genres">
+      <EntityTypeMapping TypeName="KetabGardModel.Genre">
+        <MappingFragment StoreEntitySet="Genre">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="KetabGardModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Expireactivate" ColumnName="Expireactivate" />
+          <ScalarProperty Name="SaveDateY" ColumnName="SaveDateY" />
+          <ScalarProperty Name="SaveDateM" ColumnName="SaveDateM" />
+          <ScalarProperty Name="LastBook" ColumnName="LastBook" />
+          <ScalarProperty Name="HowManyTimeForBook" ColumnName="HowManyTimeForBook" />
+          <ScalarProperty Name="WhenGiveBook" ColumnName="WhenGiveBook" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="Acess" ColumnName="Acess" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="CountOfGet" ColumnName="CountOfGet" />
+          <ScalarProperty Name="LastTimeComeDate" ColumnName="LastTimeComeDate" />
+          <ScalarProperty Name="SaveDateD" ColumnName="SaveDateD" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="WhoSave" ColumnName="WhoSave" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+          <ScalarProperty Name="EducationDegree" ColumnName="EducationDegree" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MdliCode" ColumnName="MdliCode" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

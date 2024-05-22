@@ -59,3 +59,7 @@ C:\Users\Ali\source\repos\KetabGard\KetabGard\obj\Debug\KetabGard.csproj.CoreCom
 C:\Users\Ali\source\repos\KetabGard\KetabGard\obj\Debug\KetabGard.csproj.Up2Date
 C:\Users\Ali\source\repos\KetabGard\KetabGard\obj\Debug\KetabGard.dll
 C:\Users\Ali\source\repos\KetabGard\KetabGard\obj\Debug\KetabGard.pdb
+C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\EntityFramework.dll
+C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\EntityFramework.SqlServer.dll
+C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\EntityFramework.xml
+C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\EntityFramework.SqlServer.xml

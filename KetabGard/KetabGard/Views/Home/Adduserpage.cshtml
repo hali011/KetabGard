@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@model KetabGard.Models.User
+<div class="row">
+    <input hidden value="@Model.Id" id="useredit" />
     <div class="col-10 pe-5 pt-5 mt-5">
         <div>
             <label class="h3"><b>افزودن عضو</b></label>
@@ -7,12 +9,19 @@
             <div class="col-3 ms-5">
                 <input type="file" onchange="loadnewpic(event,3)" id="imgupload" hidden />
                 <button hidden id="OpenImgUpload">Image Upload</button>
-                <img class="cursor rounded-4" id="adduserpic" onclick="uploadpicture()" width="164" height="164" src="~/Source/AddPicture.png" />
+                @if (Model.Id == 0)
+                {
+                    <img class="cursor rounded-4" id="adduserpic" onclick="uploadpicture()" width="164" height="164" src="~/Source/AddPicture.png" />
+                }
+                else
+                {
+                    <img class="cursor rounded-4" id="adduserpic" onclick="uploadpicture()" width="164" height="164" src="@Model.PicURL" />
+                }
             </div>
             <div class="col-7 row p-5 me-5 pe-5">
                 <div class="col-3"></div>
                 <div class=" col-3">
-                    <img class="cursor" src="~/Source/Save.png" />
+                    <img class="cursor" onclick="savenewuser()" src="~/Source/Save.png" />
                 </div>
                 <div class="col-3 me-3">
                    <img class="cursor" onclick="cancelnewuser()" src="~/Source/cancel.png" />
@@ -22,35 +31,140 @@
         <div class="pe-1 mt-4">
             <div class="row">
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="نام" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="saveusername" placeholder="نام" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="saveusername" value="@Model.FirstName" placeholder="نام" />
+                    }
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="نام خانوادگی" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="saveuserlastname" placeholder="نام خانوادگی" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="saveuserlastname" value="@Model.LastName" placeholder="نام خانوادگی" />
+                    }
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="نام پدر" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="saveuserfathername" placeholder="نام پدر" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="saveuserfathername" value="@Model.FatherName" placeholder="نام پدر" />
+                    }
+
                 </div>
             </div>
             <div class="row mt-4 mb-4">
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="کد ملی" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="saveusermelicode" placeholder="کد ملی" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="saveusermelicode" value="@Model.MdliCode" placeholder="کد ملی" />
+                    }
+
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="شماره تماس" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="saveuserphonenumber" placeholder="شماره تماس" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="saveuserphonenumber" value="@Model.PhoneNumber" placeholder="شماره تماس" />
+                    }
+
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control"  placeholder="مدرک تحصیلی"/>
+                    <select class="form-select" id="saveusereducation">
+                        @if (Model.Id == 0)
+                        {
+                            <option disabled selected>مدرک تحصیلی</option>
+                            foreach (var item in ViewBag.education)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.education)
+                            {
+                                if (Model.EducationDegree == item.Id)
+                                {
+                                    <option disabled selected value="@item.Id">@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+
+                            }
+                        }
+
+                    </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="ایمیل" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="saveuseremail" placeholder="ایمیل" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="saveuseremail" value="@Model.Email" placeholder="ایمیل" />
+                    }
+
                 </div>
                 <div class="col-3">
-                    <select class="form-select">
+                    <select class="form-select" id="saveusergendre">
                         <option disabled selected>جنسیت</option>
-                        <option>مرد</option>
-                        <option>زن</option>
+                        @if (Model.Id == 0)
+                        {
+                            foreach (var item in ViewBag.gendre)
+                            {
+                                if (item.Id > 2)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.gendre)
+                            {
+                                if (item.Id > 2)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    if (Model.Gender == item.Id)
+                                    {
+                                        <option selected disabled value="@item.Id">@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            }
+                        }
+
                     </select>
                 </div>
             </div>

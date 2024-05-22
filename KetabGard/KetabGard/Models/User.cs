@@ -36,5 +36,6 @@ namespace KetabGard.Models
         public Nullable<decimal> LastBook { get; set; }
         public Nullable<decimal> SaveDateM { get; set; }
         public Nullable<decimal> SaveDateY { get; set; }
+        public Nullable<decimal> Expireactivate { get; set; }
     }
 }

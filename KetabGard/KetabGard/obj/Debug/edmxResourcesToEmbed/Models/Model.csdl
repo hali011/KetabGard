@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KetabGardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Mcode" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phonenumber" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EducationDegree" Type="Int32" />
+    <Property Name="Picurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Writer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Editor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Translator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Genre" Type="Int32" />
+    <Property Name="YearofPublication" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GetCount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Here" Type="Boolean" />
+    <Property Name="Row" Type="Int32" />
+    <Property Name="Col" Type="Int32" />
+    <Property Name="WhoIsGet" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="WhenBack" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Backed" Type="Boolean" />
+    <Property Name="Rate" Type="Int32" />
+    <Property Name="WhoGiveRate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Pages" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="WhoSave" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EducationDegree">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="KetabGardEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="EducationDegrees" EntityType="Self.EducationDegree" />
+    <EntitySet Name="Genders" EntityType="Self.Gender" />
+    <EntitySet Name="Genres" EntityType="Self.Genre" />
+    <EntitySet Name="Users" EntityType="KetabGardModel.User" />
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MdliCode" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Int32" />
+    <Property Name="EducationDegree" Type="Int32" />
+    <Property Name="PicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WhoSave" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="SaveDateD" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="LastTimeComeDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountOfGet" Type="Int32" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Acess" Type="Int32" />
+    <Property Name="BookId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="WhenGiveBook" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HowManyTimeForBook" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastBook" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SaveDateM" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SaveDateY" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Expireactivate" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+</Schema>

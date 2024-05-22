@@ -8,7 +8,7 @@
     <style>
         body {
             direction: rtl;
-            font-family: 'iranian sans';
+            font-family: 'iransans(fanum)';
         }
 
         .bgcustom {
@@ -20,367 +20,52 @@
         .cursor {
             cursor: pointer
         }
+
+        .full-height {
+            height: 100vh;
+        }
     </style>
+    <link href="~/CSS/Loader.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="~/Scripts/converter.js"></script>
     <script>
-    // for index
-        function defultmenu(object) {
-            for (let x in object) {
-                switch (object[x].id) {
-                    case 0:
-                        object[x].undivtag.removeClass("bg-primary");
-                        object[x].untxttag.removeClass("text-white").addClass("text-secondary");
-                        object[x].unimgtag.attr("src", "/Source/Dashboard.png");
-                        break;
-                    case 1:
-                        object[x].undivtag.removeClass("bg-primary");
-                        object[x].untxttag.removeClass("text-white").addClass("text-secondary");
-                        object[x].unimgtag.attr("src", "/Source/User.png");
-                        break;
-                    case 2:
-                        object[x].undivtag.removeClass("bg-primary");
-                        object[x].untxttag.removeClass("text-white").addClass("text-secondary");
-                        object[x].unimgtag.attr("src", "/Source/Book.png");
-                        break;
-                    case 3:
-                        object[x].undivtag.removeClass("bg-primary");
-                        object[x].untxttag.removeClass("text-white").addClass("text-secondary");
-                        object[x].unimgtag.attr("src", "/Source/Amanat.png");
-                        break;
-                }
-            }
-        }
-        function selectedmenu(divtag, imgtag, txttag, x) {
-            let notselected = [];
-            switch (x) {
-                case 0:
-                    divtag.addClass("bg-primary");
-                    txttag.removeClass("text-secondary").addClass("text-white");
-                    imgtag.attr("src", "/Source/SelectedDashboard.png");
-                    notselected = [
-                        { undivtag: $('#User'), unimgtag: $('#imgUser'), untxttag: $('#txtUser'), id: 1 },
-                        { undivtag: $('#Books'), unimgtag: $('#imgBook'), untxttag: $('#txtBook'), id: 2 },
-                        { undivtag: $('#Amanat'), unimgtag: $('#imgAmanat'), untxttag: $('#txtAmanat'), id: 3 }
-                    ]
-                    defultmenu(notselected)
-                    SelectedAddadmin($('#divAddAdmin'), false)
-                    loadpage(x)
-                    break;
-                case 1:
-                    divtag.addClass("bg-primary");
-                    txttag.removeClass("text-secondary").addClass("text-white");
-                    imgtag.attr("src", "/Source/SelectedUser.png");
-                    notselected = [
-                        { undivtag: $('#Dashboard'), unimgtag: $('#imgdashboard'), untxttag: $('#txtdashboard'), id: 0 },
-                        { undivtag: $('#Books'), unimgtag: $('#imgBook'), untxttag: $('#txtBook'), id: 2 },
-                        { undivtag: $('#Amanat'), unimgtag: $('#imgAmanat'), untxttag: $('#txtAmanat'), id: 3 }
-                    ]
-                    defultmenu(notselected)
-                    SelectedAddadmin($('#divAddAdmin'), false)
-                    loadpage(x)
-                    break;
-                case 2:
-                    divtag.addClass("bg-primary");
-                    txttag.removeClass("text-secondary").addClass("text-white");
-                    imgtag.attr("src", "/Source/SelectedBook.png");
-                    notselected = [
-                        { undivtag: $('#Dashboard'), unimgtag: $('#imgdashboard'), untxttag: $('#txtdashboard'), id: 0 },
-                        { undivtag: $('#User'), unimgtag: $('#imgUser'), untxttag: $('#txtUser'), id: 1 },
-                        { undivtag: $('#Amanat'), unimgtag: $('#imgAmanat'), untxttag: $('#txtAmanat'), id: 3 }
-                    ]
-                    defultmenu(notselected)
-                    SelectedAddadmin($('#divAddAdmin'), false)
-                    loadpage(x)
-                    break;
-                case 3:
-                    divtag.addClass("bg-primary");
-                    txttag.removeClass("text-secondary");
-                    txttag.addClass("text-white");
-                    imgtag.attr("src", "/Source/SelectedAmanati.png");
-                    notselected = [
-                        { undivtag: $('#Dashboard'), unimgtag: $('#imgdashboard'), untxttag: $('#txtdashboard'), id: 0 },
-                        { undivtag: $('#User'), unimgtag: $('#imgUser'), untxttag: $('#txtUser'), id: 1 },
-                        { undivtag: $('#Books'), unimgtag: $('#imgBook'), untxttag: $('#txtBook'), id: 2 }
-                    ]
-                    defultmenu(notselected)
-                    SelectedAddadmin($('#divAddAdmin'), false)
-                    loadpage(x)
-                    break;
-            }
-        }
+        let timeout;
 
-        function SelectedAddadmin(divaddAdmin, selected) {
-            if (selected) {
-                let notselected = [
-                    { undivtag: $('#Dashboard'), unimgtag: $('#imgdashboard'), untxttag: $('#txtdashboard'), id: 0 },
-                    { undivtag: $('#User'), unimgtag: $('#imgUser'), untxttag: $('#txtUser'), id: 1 },
-                    { undivtag: $('#Books'), unimgtag: $('#imgBook'), untxttag: $('#txtBook'), id: 2 },
-                    { undivtag: $('#Amanat'), unimgtag: $('#imgAmanat'), untxttag: $('#txtAmanat'), id: 3 }
-                ]
-                defultmenu(notselected)
-                divaddAdmin.css("background-color", "rgba(30,30,30,0.2)")
-                let x = 4
-                loadpage(x)
-            } else {
-                divaddAdmin.css("background-color", "")
-            }
-        }
-
-        function loadpage(number) {
-            switch (number) {
-                case 0:
-                    loadDashboard()
-                    break;
-                case 1:
-                    loadUserpage()
-                    break;
-                case 2:
-                    loadBookpage()
-                    break;
-                case 3:
-                    loadAmanatpage()
-                    break;
-                case 4:
-                    loadAdminpage()
-                    break;
-            }
-        }
-
-        function getdatenow() {
-            const d = new Date();
-            let gy = d.getFullYear();
-            let gm = d.getMonth() + 1;
-            let gd = d.getDate();
-            let jalalidate = gregorian_to_jalali(gy, gm, gd);
-            let datenow ;
-            let datemonth ;
-            switch (jalalidate[1]) {
-                case 1:
-                    datemonth = "فروردین"
-                    break;
-                case 2:
-                    datemonth = "اردیبهشت"
-                    break;
-                case 3:
-                    datemonth = "خرداد"
-                    break;
-                case 4:
-                    datemonth = "تیر"
-                    break;
-                case 5:
-                    datemonth = "مرداد"
-                    break;
-                case 6:
-                    datemonth = "شهریور"
-                    break;
-                case 7:
-                    datemonth = "مهر"
-                    break;
-                case 8:
-                    datemonth = "آبان"
-                    break;
-                case 9:
-                    datemonth = "آذر"
-                    break;
-                case 10:
-                    datemonth = "دی"
-                    break;
-                case 11:
-                    datemonth = "بهمن"
-                    break;
-                case 12:
-                    datemonth = "اسفند"
-                    break;
-            }
-            return datenow = jalalidate[2] + " " + datemonth + " " + jalalidate[0];
-        }
-
-        function loadDashboard() {
-            fetch('/Home/Dashboard', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                    const datenow = getdatenow()
-                    $("#nowdate").append(datenow);
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-        function loadUserpage() {
-            fetch('/Home/Userpage', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                    loadusers(0);
-                    const datenow = getdatenow()
-                    $("#nowdate").append(datenow);
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-        function loadBookpage() {
-            fetch('/Home/Bookpage', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                    const datenow = getdatenow()
-                    $("#nowdate").append(datenow);
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-        function loadAmanatpage() {
-            fetch('/Home/Amanatpage', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                    loadamanatis(0);
-                    const datenow = getdatenow();
-                    $("#nowdate").append(datenow);
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-        function loadAdminpage() {
-            fetch('/Home/Adminpage', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-    </script>
-    <script>
-    //for userpage
-        function defultselecteduser(object) {
-            for (let x in object) {
-                object[x].unselectedbtn.removeClass("button-36").removeClass("disabled").addClass("button-35");
-            }
-        }
-        function selectedtypeofusers(btnselected, id) {
-            let unselected = []
+        function search(id, str) {
             switch (id) {
-                case 1:
-                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
-                    loadusers(0);
-                    unselected = [
-                        { unselectedbtn: $("#activeuser"), id: 2 },
-                        { unselectedbtn: $("#deactiveuser"), id: 3 }
-                    ]
-                    defultselecteduser(unselected)
-                    break;
-                case 2:
-                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
-                    loadusers(1);
-                    unselected = [
-                        { unselectedbtn: $("#alluser"), id: 1 },
-                        { unselectedbtn: $("#deactiveuser"), id: 3 }
-                    ]
-                    defultselecteduser(unselected)
-                    break;
-                case 3:
-                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
-                    loadusers(2)
-                    unselected = [
-                        { unselectedbtn: $("#alluser"), id: 1 },
-                        { unselectedbtn: $("#activeuser"), id: 2 }
-                    ]
-                    defultselecteduser(unselected)
-                    break;
-            }
-        }
-        function loadusers(x) {
-            switch (x) {
                 case 0:
-                    fetch('/Home/UsersTypeTable', {
+                    fetch('/Home/booksearch', {
                         method: 'POST',
                         cache: 'no-cache',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ id: x })
+                        body: JSON.stringify({ bookname: str })
                     })
                         .then(response => response.text())
                         .then(data => {
-                            $("#divusertable").html(data);
+                            $("#divsearchresult").html(data);
                         })
                         .catch(error => {
                             alert("Error")
                         })
                     break;
                 case 1:
-                    fetch('/Home/UsersTypeTable', {
+                    fetch('/Home/usersearch', {
                         method: 'POST',
                         cache: 'no-cache',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ id: x })
+                        body: JSON.stringify({ nameorcdm: str })
                     })
                         .then(response => response.text())
                         .then(data => {
-                            $("#divusertable").html(data);
-                        })
-                        .catch(error => {
-                            alert("Error")
-                        })
-                    break;
-                case 2:
-                    fetch('/Home/UsersTypeTable', {
-                        method: 'POST',
-                        cache: 'no-cache',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ id: x })
-                    })
-                        .then(response => response.text())
-                        .then(data => {
-                            $("#divusertable").html(data);
+                            $("#divsearchresult").html(data);
                         })
                         .catch(error => {
                             alert("Error")
@@ -388,88 +73,7 @@
                     break;
             }
         }
-        function Adduserloadpage() {
-            fetch('/Home/Adduserpage', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-        function cancelnewuser() {
-            loadUserpage();
-        }
-    </script>
-    <script>
-    //for bookpage
-        function Addbookloadpage() {
-            fetch('/Home/Addbookpage', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                    $("#newgenreinput").hide();
-                    $("#cancelnewgenre").hide();
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-        function newgenre() {
-            $("#genreselect").hide();
-            $("#newgenreinput").show();
-            $("#cancelnewgenre").show();
-        }
-        function cancelnewgenrebtn() {
-            $("#genreselect").show();
-            $("#newgenreinput").hide();
-            $("#cancelnewgenre").hide();
-            $("#genreselect").val('0').change();
-        }
-        function cancelnewbook() {
-            loadBookpage()
-        }
-    </script>
-    <script>
-    // for adminpage
-        function Addadminpageload() {
-            fetch('/Home/Addadminpage', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-        function cancelnewadmin() {
-            loadAdminpage()
-        }
-        function uploadpicture() {
-            $('#imgupload').trigger('click');
-        }
+
         function loadnewpic(event, x) {
             const fileinput = event.target;
             if (fileinput.files.length > 0) {
@@ -525,155 +129,13 @@
             }
         }
     </script>
-    <script> // for amanati page
-        function selectedtypeofAmanati(btnselected, id) {
-            let unselected = []
-            switch (id) {
-                case 1:
-                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
-                    loadamanatis(0);
-                    unselected = [
-                        { unselectedbtn: $("#activeamanat"), id: 2 },
-                        { unselectedbtn: $("#deactiveamanat"), id: 3 }
-                    ]
-                    defultselecteduser(unselected)
-                    break;
-                case 2:
-                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
-                    loadamanatis(1);
-                    unselected = [
-                        { unselectedbtn: $("#allamanati"), id: 1 },
-                        { unselectedbtn: $("#deactiveamanat"), id: 3 }
-                    ]
-                    defultselecteduser(unselected)
-                    break;
-                case 3:
-                    btnselected.removeClass("button-35").addClass("button-36").addClass("disabled");
-                    loadamanatis(2)
-                    unselected = [
-                        { unselectedbtn: $("#allamanati"), id: 1 },
-                        { unselectedbtn: $("#activeamanat"), id: 2 }
-                    ]
-                    defultselecteduser(unselected)
-                    break;
-            }
-        }
-        function loadamanatis(x) {
-            switch (x) {
-                case 0:
-                    fetch('/Home/AmanatiTypeTable', {
-                        method: 'POST',
-                        cache: 'no-cache',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ id: x })
-                    })
-                        .then(response => response.text())
-                        .then(data => {
-                            $("#divamanattable").html(data);
-                        })
-                        .catch(error => {
-                            alert("Error")
-                        })
-                    break;
-                case 1:
-                    fetch('/Home/AmanatiTypeTable', {
-                        method: 'POST',
-                        cache: 'no-cache',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ id: x })
-                    })
-                        .then(response => response.text())
-                        .then(data => {
-                            $("#divamanattable").html(data);
-                        })
-                        .catch(error => {
-                            alert("Error")
-                        })
-                    break;
-                case 2:
-                    fetch('/Home/AmanatiTypeTable', {
-                        method: 'POST',
-                        cache: 'no-cache',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ id: x })
-                    })
-                        .then(response => response.text())
-                        .then(data => {
-                            $("#divamanattable").html(data);
-                        })
-                        .catch(error => {
-                            alert("Error")
-                        })
-                    break;
-            }
-        }
-        function AddAmanatiloadpage() {
-            fetch('/Home/Addamanatipage', {
-                method: 'POST',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: 1 })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    $("#loadpartial").html(data);
-                })
-                .catch(error => {
-                    alert("Error")
-                })
-        }
-        function cancelnewamanati() {
-            loadAmanatpage();
-        }
-    </script>
-    <script> //for search
-        function search(id,str) {
-            switch (id) {
-                case 0:
-                    fetch('/Home/booksearch', {
-                        method: 'POST',
-                        cache: 'no-cache',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ bookname: str })
-                    })
-                        .then(response => response.text())
-                        .then(data => {
-                            $("#divsearchresult").html(data);
-                        })
-                        .catch(error => {
-                            alert("Error")
-                        })
-                    break;
-                case 1:
-                    fetch('/Home/usersearch', {
-                        method: 'POST',
-                        cache: 'no-cache',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ nameorcdm: str })
-                    })
-                        .then(response => response.text())
-                        .then(data => {
-                            $("#divsearchresult").html(data);
-                        })
-                        .catch(error => {
-                            alert("Error")
-                        })
-                    break;
-            }
-        }
-    </script>
+    <script src="~/Scripts/Index.js"></script>
+    <script src="~/Scripts/Loadingpage.js"></script>
+    <script src="~/Scripts/Userpage.js"></script>
+    <script src="~/Scripts/Bookpage.js"></script>
+    <script src="~/Scripts/Amanatpage.js"></script>
+    <script src="~/Scripts/Adminpage.js"></script>
+
     @RenderSection("scripts", required: false)
 </head>
 <body>

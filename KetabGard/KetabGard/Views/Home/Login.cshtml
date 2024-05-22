@@ -34,7 +34,12 @@
             })
                 .then(response => response.text())
                 .then(data => {
-
+                    if (data.error) {
+                        alert("کاربری با  این رمز ورود یافت نشد");
+                    }
+                    else {
+                        window.location.href = '/Home/Index'
+                    }
                 })
                 .catch(error => {
                     alert("Error")
@@ -69,7 +74,7 @@
                                     <div class="mb-3">
                                         <label>رمز عبور</label>
                                     </div>
-                                    <input id="pass" class="pt-1 pb-1 pe-3 border w-100 border-2 border-secondary rounded-3" placeholder="رمز خود را وارد کنید" style="background-color: rgba(82,92,235,0)" />
+                                    <input id="pass" class="pt-1 pb-1 pe-3 border w-100 border-2 border-secondary rounded-3" type="password" placeholder="رمز خود را وارد کنید" style="background-color: rgba(82,92,235,0)" />
                                 </div>
                                 <div class="p-4 pe-3 pt-0 text-center">
                                     <img class="w-100 h-auto" style="cursor:pointer" onclick="login($('#user').val(),$('#pass').val())" src="~/Source/Loginbutten.png" />
