@@ -9,7 +9,7 @@
             <div class="col-3 ms-5">
                 <input type="file" onchange="loadnewpic(event,3)" id="imgupload" hidden />
                 <button hidden id="OpenImgUpload">Image Upload</button>
-                @if (Model.Id == 0)
+                @if (Model.Id == 0 || Model.PicURL == "" || Model.PicURL == null)
                 {
                     <img class="cursor rounded-4" id="adduserpic" onclick="uploadpicture()" width="164" height="164" src="~/Source/AddPicture.png" />
                 }

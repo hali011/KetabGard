@@ -231,6 +231,7 @@ function loadBookpage() {
         .then(data => {
             clearTimeout(timeout);
             $("#loadpartial").html(data);
+            loadbooktable()
             const datenow = getdatenow()
             $("#nowdate").append(datenow);
             Cookies.set('state', 'Bookpage');

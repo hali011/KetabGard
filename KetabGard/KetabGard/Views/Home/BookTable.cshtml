@@ -1,0 +1,43 @@
+﻿@model IEnumerable<KetabGard.Models.Book>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-secondary" scope="col">کتاب</th>
+            <th class="text-secondary" scope="col">نام نویسنده</th>
+            <th class="text-secondary" scope="col">دسته بندی</th>
+            <th class="text-secondary" scope="col">سال انتشار</th>
+            <th class="text-secondary" scope="col">تعداد به امانت برده شده</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img class="float-end rounded-3" style=" height:2rem; width:2rem" src=@item.PicURL />
+                        <label class="mt-1 me-2">@item.Name</label>
+                    </td>
+                    <td class="mt-1">@item.Writer</td>
+                    @foreach (var genre in ViewBag.bgenre)
+                    {
+                        if (genre.Id == item.Genre)
+                        {
+                            <td class="mt-1">@genre.Name</td>
+                        }
+                    }
+
+                    <td class="mt-1">@item.YearofPublication</td>
+                    <td class="mt-1">@item.GetCount</td>
+                    <td>
+                        <img class="cursor" onclick="editbook(@item.Id)" src="~/Source/EditBook.png" />
+                    </td>
+                    <td>
+                        <img class="cursor" onclick="delbook(@item.Id)" src="~/Source/DelBook.png" />
+                    </td>
+
+                </tr>
+            }
+    </tbody>
+</table>

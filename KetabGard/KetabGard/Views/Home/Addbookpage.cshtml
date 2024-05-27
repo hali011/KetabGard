@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@model KetabGard.Models.Book
+<div class="row">
+    <input id="editbook" type="number" value="@Model.Id" hidden />
     <div class="col-10 pe-5 pt-5 mt-5">
         <div>
             <label class="h3"><b>افزودن عضو</b></label>
@@ -7,12 +9,19 @@
             <div class="col-3 ms-5">
                 <input type="file" onchange="loadnewpic(event,2)" id="imgupload" hidden />
                 <button hidden id="OpenImgUpload">Image Upload</button>
-                <img class="cursor rounded-4" id="addbookpic" onclick="uploadpicture()" width="164" height="164"  src="~/Source/AddPicture.png" />
+                @if (Model.Id == 0 || Model.PicURL == "" || Model.PicURL == null)
+                {
+                    <img class="cursor rounded-4" id="addbookpic" onclick="uploadpicture()" width="164" height="164" src="~/Source/AddPicture.png" />
+                }
+                else
+                {
+                    <img class="cursor rounded-4" id="addbookpic" onclick="uploadpicture()" width="164" height="164" src="@Model.PicURL" />
+                }
             </div>
             <div class="col-7 row p-5 me-5 pe-5">
                 <div class="col-3"></div>
                 <div class=" col-3">
-                    <img class="cursor" src="~/Source/Save.png" />
+                    <img class="cursor" onclick="Savebook()" src="~/Source/Save.png" />
                 </div>
                 <div class="col-3 me-3">
                     <img class="cursor" onclick="cancelnewbook()" src="~/Source/cancel.png" />
@@ -22,17 +31,56 @@
         <div class="pe-1 mt-4">
             <div class="row">
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="نام کتاب" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="bookname" placeholder="نام کتاب" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="bookname" value="@Model.Name" placeholder="نام کتاب" />
+                    }
+
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="نام نویسنده" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="bookwriter" placeholder="نام نویسنده" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="bookwriter" value="@Model.Writer" placeholder="نام نویسنده" />
+                    }
+
                 </div>
                 <div class="col-3">
                     <input class="form-control rounded-2" placeholder="نام دسته بندی جدید" id="newgenreinput" />
-                    <select id="genreselect" class="form-select">
-                        <option value="0" disabled selected>دسته بندی</option>
-                        <option value="1">انگیزشی</option>
-                        <option value="2" onclick="newgenre()">دسته جدید</option>
+                    <select id="genreselect" onchange="newgenre()" class="form-select">
+                        @if (Model.Id == 0)
+                        {
+                            <option disabled value="defult" selected>دسته بندی</option>
+                            foreach (var item in ViewBag.genre)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                            <option value="0">دسته جدید</option>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.genre)
+                            {
+                                if (item.Id == Model.Genre)
+                                {
+                                    <option selected disabled value="@item.Id">@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+
+                            }
+                            <option value="0">دسته جدید</option>
+                        }
+
                     </select>
                 </div>
                 <div class="col-2">
@@ -41,10 +89,26 @@
             </div>
             <div class="row mt-4 mb-4">
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="سال انتشار" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="publication" placeholder="سال انتشار" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="publication" value="@Model.YearofPublication" placeholder="سال انتشار" />
+                    }
+
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="تعداد صفحه" />
+                    @if (Model.Id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="countofbook" placeholder="تعداد صفحه" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="countofbook" placeholder="تعداد صفحه" value="@Model.Pages" />
+                    }
+
                 </div>
             </div>
         </div>

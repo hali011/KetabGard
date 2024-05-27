@@ -311,6 +311,7 @@
     <Content Include="Views\Home\Searchresult.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\loader.cshtml" />
+    <Content Include="Views\Home\BookTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

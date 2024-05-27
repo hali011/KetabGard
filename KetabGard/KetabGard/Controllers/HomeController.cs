@@ -68,6 +68,12 @@ namespace KetabGard.Controllers
             int.TryParse(id, out int x);
             if (x == 1)
             {
+                List<Genre> genre = new List<Genre>();
+                using (KetabGardEntities db = new KetabGardEntities())
+                {
+                    genre = db.Genres.ToList();
+                }
+                ViewBag.bgenre = genre;
                 return PartialView();
             }
             else
@@ -224,17 +230,109 @@ namespace KetabGard.Controllers
         #endregion
 
         #region BookPageSection
+        public ActionResult BookTable()
+        {
+            var books = new List<Book>();
+            List<Genre> genre = new List<Genre>();
+
+            using (KetabGardEntities db = new KetabGardEntities())
+            {
+                genre = db.Genres.ToList();
+                books = db.Books.ToList();
+            }
+            ViewBag.bgenre = genre;
+            return PartialView(books);
+        }
+        public JsonResult Delbook(int id)
+        {
+            bool flag = false;
+            using (KetabGardEntities db = new KetabGardEntities())
+            {
+                var book = db.Books.Where(w => w.Id == id).SingleOrDefault();
+                db.Books.Remove(book);
+                db.SaveChanges();
+                flag = true;
+            }
+            return Json(new { flag = flag });
+        }
         public ActionResult Addbookpage(string id)
         {
             int.TryParse(id, out int x);
             if (x == 1)
             {
-                return PartialView();
+                List<Genre> gn = new List<Genre>();
+                var book = new Book();
+
+                using (KetabGardEntities db = new KetabGardEntities())
+                {
+                    gn = db.Genres.ToList();
+                }
+                ViewBag.genre = gn;
+                return PartialView(book);
+            }
+            else if (x > 1)
+            {
+                List<Genre> gn = new List<Genre>();
+                var book = new Book();
+
+                using (KetabGardEntities db = new KetabGardEntities())
+                {
+                    book = db.Books.Where(w=>w.Id == x).SingleOrDefault();
+                    gn = db.Genres.ToList();
+                }
+                ViewBag.genre = gn;
+                return PartialView(book);
             }
             else
             {
                 return RedirectToAction("Index");
             }
+        }
+
+        public JsonResult Savenewbook(Book book)
+        {
+            if (book.Id == 0)
+            {
+                using (KetabGardEntities db = new KetabGardEntities())
+                {
+                    book.GetCount = 0;
+                    db.Books.Add(book);
+                    db.SaveChanges();
+                }
+                return Json(new { sucess = "عملیات با موفقیت انجام شد" });
+            }
+            else
+            {
+                using (KetabGardEntities db = new KetabGardEntities())
+                {
+                    var editbook = db.Books.Where(w => w.Id == book.Id).SingleOrDefault();
+                    editbook.Name = book.Name;editbook.Writer = book.Writer;editbook.PicURL = book.PicURL;editbook.Genre = book.Genre;editbook.YearofPublication = book.YearofPublication; editbook.Pages = book.Pages;
+                    db.Entry(editbook).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return Json(new { sucess = "عملیات با موفقیت انجام شد" });
+            }
+            
+        }
+
+        public JsonResult Savegenrebook(string genre)
+        {
+            bool flag = false;
+            Genre gn = new Genre();
+            gn.Name = genre;
+
+            using (KetabGardEntities db = new KetabGardEntities())
+            {
+                if (db.Genres.Where(w=>w.Name == gn.Name).SingleOrDefault() == null)
+                {
+                    flag = true;
+
+                    db.Genres.Add(gn);
+                    db.SaveChanges();
+                    gn = db.Genres.Where(w => w.Name == gn.Name).SingleOrDefault();
+                }
+            }
+            return Json(new {flag = flag , id = gn.Id});
         }
         #endregion
 
