@@ -1,18 +1,29 @@
-﻿<div class="row">
+﻿@model KetabGard.Models.Admin
+<div class="row">
+    <input type="number" value="@Model.id" id="editadminid" hidden />
     <div class="col-10 pe-5 pt-5 mt-5">
         <div>
-            <label class="h3"><b>افزودن عضو</b></label>
+            <label class="h3"><b>افزودن مدیر</b></label>
         </div>
         <div class="row mt-5">
             <div class="col-3 ms-5">
                 <input type="file" onchange="loadnewpic(event,1)" id="imgupload" hidden />
                 <button hidden id="OpenImgUpload">Image Upload</button>
-                <img class="cursor rounded-4" id="addadminpic" onclick="uploadpicture()" width="164" height="164" src="~/Source/AddPicture.png" />
+                @if (Model.id == 0 || Model.Picurl == "" || Model.Picurl == null)
+                {
+                    <img class="cursor rounded-4" id="addadminpic" onclick="uploadpicture()" width="164" height="164" src="~/Source/AddPicture.png" />
+                }
+                else
+                {
+                    <img class="cursor rounded-4" id="addadminpic" onclick="uploadpicture()" width="164" height="164" src="@Model.Picurl" />
+                }
+
+
             </div>
             <div class="col-7 row p-5 me-5 pe-5">
                 <div class="col-3"></div>
                 <div class=" col-3">
-                    <img class="cursor" src="~/Source/Save.png" />
+                    <img class="cursor" onclick="savenewadmin()" src="~/Source/Save.png" />
                 </div>
                 <div class="col-3 me-3">
                     <img class="cursor" onclick="cancelnewadmin()" src="~/Source/cancel.png" />
@@ -22,35 +33,158 @@
         <div class="pe-1 mt-4">
             <div class="row">
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="نام" />
+                    @if (Model.id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="adminname" placeholder="نام" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="adminname" value="@Model.Name" placeholder="نام" />
+                    }
+
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="نام خانوادگی" />
+                    @if (Model.id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="adminlastname" placeholder="نام خانوادگی" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="adminlastname" value="@Model.Lastname" placeholder="نام خانوادگی" />
+                    }
+                    
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="کد ملی" />
+                    @if (Model.id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="adminmelicode" placeholder="کد ملی" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="adminmelicode" value="@Model.Mcode" placeholder="کد ملی" />
+                    }
+                    
                 </div>
             </div>
             <div class="row mt-4 mb-4">
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="نام کاربری" />
+                    @if (Model.id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="adminusername" placeholder="نام کاربری" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="adminusername" value="@Model.Username" placeholder="نام کاربری" />
+                    }
+                    
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="مدرک تحصیلی" />
+                    <select class="form-select" id="saveadmineducation">
+                        @if (Model.id == 0)
+                        {
+                            <option disabled selected>مدرک تحصیلی</option>
+                            foreach (var ed in ViewBag.education)
+                            {
+                                <option value="@ed.Id">@ed.Name</option>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var ed in ViewBag.education)
+                            {
+                                if (Model.EducationDegree == ed.Id)
+                                {
+                                    <option selected disabled value="@ed.Id">@ed.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@ed.Id">@ed.Name</option>
+                                }
+
+                            }
+                        }
+
+                    </select>
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="شماره تماس" />
+                    @if (Model.id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="adminphonenumber" placeholder="شماره تماس" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="adminphonenumber" value="@Model.Phonenumber" placeholder="شماره تماس" />
+                    }
+
                 </div>
             </div>
             <div class="row">
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="ایمیل" />
+                    @if (Model.id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="adminemail" placeholder="ایمیل" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="adminemail" placeholder="ایمیل" value="@Model.Email" />
+                    }
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="رمز عبور" />
+                    @if (Model.id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="adminpassword" placeholder="رمز عبور" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="adminpassword" value="@Model.Password" placeholder="رمز عبور" />
+                    }
+
                 </div>
                 <div class="col-3">
-                    <input class="rounded-3 form-control" placeholder="تکرار رمز عبور" />
+                    @if (Model.id == 0)
+                    {
+                        <input class="rounded-3 form-control" id="adminechopassword" placeholder="تکرار رمز عبور" />
+                    }
+                    else
+                    {
+                        <input class="rounded-3 form-control" id="adminechopassword" value="@Model.Password" placeholder="تکرار رمز عبور" />
+                    }
+                </div>
+            </div>
+            <div class="row mt-4 ">
+                <div class="col-3">
+                    <input id="newaccessname" class="rounded-3 form-control" placeholder="نام سطح دسترسی جدید" />
+                    <select class="form-select" id="accessdropdown" onchange="changedropdown()">
+                        @if (Model.id == 0)
+                        {
+                            <option value="defult" selected disabled>انتخاب سطح دسترسی</option>
+                            foreach (var access in ViewBag.access)
+                            {
+                                <option value="@access.Id">@access.Name</option>
+                            }
+                            <option value="0">سطح دسترسی جدید</option>
+                        }
+                        else
+                        {
+                            foreach (var access in ViewBag.access)
+                            {
+                                if (Model.Access == access.Id)
+                                {
+                                    <option selected disabled value="@access.Id">@access.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@access.Id">@access.Name</option>
+                                }
+
+                            }
+                            <option value="0">سطح دسترسی جدید</option>
+                        }
+
+                    </select>
+                </div>
+                <div class="col-1" id="cancelnewaccess">
+                    <button class="btn btn-danger" onclick="cancelaccess()">لغو</button>
                 </div>
             </div>
         </div>

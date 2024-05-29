@@ -1,0 +1,48 @@
+﻿@model IEnumerable<KetabGard.Models.Admin>
+<div class="table-responsive" style="max-height:400px;overflow-y:auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-secondary" scope="col">مدیر</th>
+                <th class="text-secondary" scope="col">شماره</th>
+                <th class="text-secondary" scope="col">کد ملی</th>
+                <th class="text-secondary" scope="col">نام کاربری</th>
+                <th class="text-secondary" scope="col">سمت مدیر</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                string phonenumber = "0" + item.Phonenumber;
+                <tr>
+                    <td>
+                        <img class="float-end rounded-circle" style=" height:2rem; width:2rem" src="@item.Picurl" />
+                        <label class="mt-1 me-2">@item.Name @item.Lastname</label>
+                    </td>
+                    <td class="mt-1">@phonenumber</td>
+                    <td class="mt-1">@item.Mcode</td>
+                    <td class="mt-1">@item.Username</td>
+                    <td class="mt-1 p-1">
+                        @foreach (var access in ViewBag.accesses)
+                        {
+                            if (access.Id == item.Access)
+                            {
+                                <label class="rounded-4 p-1" style="background-color: rgba(48,77,48,0.25); color: #304D30">
+                                    @access.Name
+                                </label>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <img class="cursor" onclick="editadmin(@item.id)" src="~/Source/Edit.png" />
+                    </td>
+                    <td>
+                        <img class="cursor" onclick="deladmin(@item.id)" src="~/Source/RemoveUsers.png" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

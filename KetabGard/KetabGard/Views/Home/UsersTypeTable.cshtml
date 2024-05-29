@@ -1,48 +1,50 @@
 ﻿@model IEnumerable<KetabGard.Models.User>
-<table class="table">
-    <thead>
-        <tr>
-            <th class="text-secondary" scope="col">عضو</th>
-            <th class="text-secondary" scope="col">شماره</th>
-            <th class="text-secondary" scope="col">تعداد کتاب خوانده شده</th>
-            <th class="text-secondary" scope="col">وضعیت عضویت</th>
-            <th class="text-secondary" scope="col">تاریخ عضویت</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive" style="max-height:400px;overflow-y:auto;">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>
-                    <img class="float-end rounded-circle" style="height:2rem; width:2rem;" src="@item.PicURL" />
-                    <label class="mt-1 me-2">@item.FirstName @item.LastName</label>
-                </td>
-                <td class="mt-1">@item.PhoneNumber</td>
-                <td class="mt-1">@item.CountOfGet</td>
-                <td class="mt-1 p-1">
-                    @if (item.Active == true)
-                    {
-                        <label class="rounded-4 p-1" style="background-color: rgba(48,77,48,0.25); color: #304D30">
-                            فعال(@item.Expireactivate روز)
-                        </label>
-                    }
-                    else
-                    {
-                        <label class="rounded-4 p-1" style="background-color: rgba(48,77,48,0.25); color: #304D30">
-                            غیرفعال(@item.Expireactivate روز)
-                        </label>
-                    }
-                </td>
-                <td class="mt-1">@item.SaveDateY/@(item.SaveDateM > 10 ? item.SaveDateM : "0"+ item.SaveDateM)/@(item.SaveDateD > 10 ? item.SaveDateD : "0"+ item.SaveDateD)</td>
-                <td>
-                    <img class="cursor" onclick="useredit(@item.Id)" src="~/Source/Edit.png" />
-                </td>
-                <td>
-                    <img class="cursor" onclick="userdelete(@item.Id)" src="~/Source/RemoveUsers.png" />
-                </td>
+                <th class="text-secondary" scope="col">عضو</th>
+                <th class="text-secondary" scope="col">شماره</th>
+                <th class="text-secondary" scope="col">تعداد کتاب خوانده شده</th>
+                <th class="text-secondary" scope="col">وضعیت عضویت</th>
+                <th class="text-secondary" scope="col">تاریخ عضویت</th>
+                <th></th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img class="float-end rounded-circle" style="height:2rem; width:2rem;" src="@item.PicURL" />
+                        <label class="mt-1 me-2">@item.FirstName @item.LastName</label>
+                    </td>
+                    <td class="mt-1">@item.PhoneNumber</td>
+                    <td class="mt-1">@item.CountOfGet</td>
+                    <td class="mt-1 p-1">
+                        @if (item.Active == true)
+                        {
+                            <label class="rounded-4 p-1 cursor" onclick="activeuserfordays(@item.Id,this)" style="background-color: rgba(48,77,48,0.25); color: #304D30">
+                                فعال(@item.Expireactivate روز)
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="rounded-4 p-1 cursor" onclick="activeuserfordays(@item.Id,this)" style="background-color: rgba(255,65,65,0.25); color: #304D30">
+                                غیرفعال
+                            </label>
+                        }
+                    </td>
+                    <td class="mt-1">@item.SaveDateY/@(item.SaveDateM > 10 ? item.SaveDateM : "0"+ item.SaveDateM)/@(item.SaveDateD > 10 ? item.SaveDateD : "0"+ item.SaveDateD)</td>
+                    <td>
+                        <img class="cursor" onclick="useredit(@item.Id)" src="~/Source/Edit.png" />
+                    </td>
+                    <td>
+                        <img class="cursor" onclick="userdelete(@item.Id)" src="~/Source/RemoveUsers.png" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

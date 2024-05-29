@@ -1,17 +1,25 @@
 ﻿<div class="pe-5">
+    @if (ViewBag.amanat != null)
+    {
+        <input type="number" id="amanatid" hidden value="@ViewBag.amanat.Id" />
+    }
+    else
+    {
+        <input type="number" id="amanatid" hidden value="0" />
+    }
     <div class="row mt-5">
-            <div class="col-3 mt-5">
-                <label class="h3"><b>افزودن امانتی</b></label>
+        <div class="col-3 mt-5">
+            <label class="h3"><b>افزودن امانتی</b></label>
+        </div>
+        <div class="col-7 row p-5 me-5 pe-5">
+            <div class="col-3"></div>
+            <div class=" col-3">
+                <img class="cursor" data-toggle="modal" data-target="#successModal" onclick="savenewamanat()" src="~/Source/Save.png" />
             </div>
-            <div class="col-7 row p-5 me-5 pe-5">
-                <div class="col-3"></div>
-                <div class=" col-3">
-                    <img class="cursor" src="~/Source/Save.png" />
-                </div>
-                <div class="col-3 me-3">
-                    <img class="cursor" onclick="cancelnewamanati()" src="~/Source/cancel.png" />
-                </div>
+            <div class="col-3 me-3">
+                <img class="cursor" onclick="cancelnewamanati()" src="~/Source/cancel.png" />
             </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-4">
@@ -19,21 +27,40 @@
                 <label class="h5"><b>کتاب</b></label>
             </div>
             <div>
-                <div class="row m-3 ms-0 me-0 rounded-3 ps-0 pe-0 border border-2 border-secondary">
+                <div class="row m-3 ms-0 me-0 rounded-3 p-0 ps-0 pe-0 border border-2 border-secondary">
                     <div class="col-1 m-0 p-2 pe-3 ms-3 text-end">
                         <img src="~/Source/Searchicon.png" />
                     </div>
-                    <input id="bsearchbox" class="col-10 rounded-2 searchbox me0 pe-0" onkeyup="search(0,$('#bsearchbox').val())" placeholder="جست و جو کنید" style="border:0" />
+                    <input id="bsearchbox" class="col-10 rounded-2 searchbox me-0 pe-0" onkeyup="search(0,$('#bsearchbox').val())" placeholder="جست و جو کنید" style="border:0" />
                 </div>
             </div>
             <div>
-                <img src="~/Source/BookPicture.png" />
+                @if (ViewBag.book != null)
+                {
+                    <img class="rounded-3" id="amanatbookpic" style="height:157px; width:115px;" src="@ViewBag.book.PicURL" />
+                }
+                else
+                {
+                    <img class="rounded-3" id="amanatbookpic" style="height:157px; width:115px;" src="~/Source/BookPicture.png" />
+                }
+
             </div>
             <div class="mt-3">
-                <input class="rounded-3 form-control" readonly placeholder="اسم کتاب" />
-                <input class="rounded-3 form-control mt-3" readonly placeholder="نام نویسنده" />
-                <input class="rounded-3 form-control mt-3" readonly placeholder="دسته بندی" />
-                <input class="rounded-3 form-control mt-3" readonly placeholder="سال انتشار" />
+                @if (ViewBag.book != null)
+                {
+                    <input hidden value="@ViewBag.book.Id" id="amanatbookid" />
+                    <input value="@ViewBag.book.Name" class="rounded-3 form-control" id="amanatbookname" readonly placeholder="اسم کتاب" />
+                    <input value="@ViewBag.book.Writer" class="rounded-3 form-control mt-3" id="amanatbookwriter" readonly placeholder="نام نویسنده" />
+                    <input value="@ViewBag.book.YearofPublication" class="rounded-3 form-control mt-3" id="amanatbookpublication" readonly placeholder="سال انتشار" />
+                }
+                else
+                {
+                    <input hidden id="amanatbookid" />
+                    <input class="rounded-3 form-control" id="amanatbookname" readonly placeholder="اسم کتاب" />
+                    <input class="rounded-3 form-control mt-3" id="amanatbookwriter" readonly placeholder="نام نویسنده" />
+                    <input class="rounded-3 form-control mt-3" id="amanatbookpublication" readonly placeholder="سال انتشار" />
+                }
+
             </div>
         </div>
         <div class="col-4">
@@ -45,21 +72,51 @@
                     <div class="col-1 m-0 p-2 pe-3 ms-3 text-end">
                         <img src="~/Source/Searchicon.png" />
                     </div>
-                    <input id="usearchbox" class="col-10 rounded-2 me0 pe-0" onkeyup="search(1,$('#usearchbox').val())" placeholder="جست و جو کنید" style="border:0" />
+                    <input id="usearchbox" class="col-10 searchbox rounded-2 me0 pe-0" onkeyup="search(1,$('#usearchbox').val())" placeholder="جست و جو کنید" style="border:0" />
                 </div>
             </div>
             <div>
-                <img src="~/Source/UserPicture.png" />
+                @if (ViewBag.user != null)
+                {
+                    <img class="rounded-3" id="amanatuserpic" style="height:157px; width:115px;" src="@ViewBag.user.PicURL" />
+                }
+                else
+                {
+                    <img class="rounded-3" id="amanatuserpic" style="height:157px; width:115px;" src="~/Source/UserPicture.png" />
+                }
+
             </div>
             <div class="mt-3">
-                <input class="rounded-3 form-control" readonly placeholder="نام" />
-                <input class="rounded-3 form-control mt-3" readonly placeholder="نام خانوادگی" />
-                <input class="rounded-3 form-control mt-3" readonly placeholder="کد ملی" />
-                <input class="rounded-3 form-control mt-3" readonly placeholder="شماره تماس" />
+                @if (ViewBag.user != null)
+                {
+                    <input value="@ViewBag.user.Id" hidden id="amanatuserid" />
+                    <input value="@ViewBag.user.FirstName" id="amanatusername" class="rounded-3 form-control" readonly placeholder="نام" />
+                    <input value="@ViewBag.user.LastName" id="amanatuserlname" class="rounded-3 form-control mt-3" readonly placeholder="نام خانوادگی" />
+                    <input value="@ViewBag.user.PhoneNumber" id="amanatuserphonenumber" class="rounded-3 form-control mt-3" readonly placeholder="شماره تماس" />
+                }
+                else
+                {
+                    <input hidden id="amanatuserid" />
+                    <input id="amanatusername" class="rounded-3 form-control" readonly placeholder="نام" />
+                    <input id="amanatuserlname" class="rounded-3 form-control mt-3" readonly placeholder="نام خانوادگی" />
+                    <input id="amanatuserphonenumber" class="rounded-3 form-control mt-3" readonly placeholder="شماره تماس" />
+                }
             </div>
         </div>
         <div class="col-4" id="divsearchresult">
 
+        </div>
+    </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="checkmark">✔️</div>
+                    <p>درخواست با <span class="text-success">موفقیت</span> ثبت شد</p>
+                    <p id="tarikhtahvil">تاریخ تحویل: 1403/03/13 (14 روز)</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

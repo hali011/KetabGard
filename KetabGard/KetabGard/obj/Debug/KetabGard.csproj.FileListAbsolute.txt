@@ -63,3 +63,5 @@ C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\EntityFramework.dll
 C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\EntityFramework.SqlServer.dll
 C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\EntityFramework.xml
 C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\EntityFramework.SqlServer.xml
+C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\PersianDateTime.dll
+C:\Users\Ali\source\repos\KetabGard\KetabGard\bin\PersianDateTime.xml

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<KetabGard.Models.DashboardTable>
+<div class="table-responsive" style="max-height:200px;overflow-y:auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-secondary" scope="col">عضو</th>
+                <th class="text-secondary" scope="col">شماره</th>
+                <th class="text-secondary" scope="col">تعداد کتاب خوانده شده</th>
+                <th class="text-secondary" scope="col">آخرین کتاب خوانده شده</th>
+                <th class="text-secondary" scope="col">تاریخ عضویت</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img class="float-end rounded-circle" style=" height:2rem" src="@item.PicURL" />
+                        <label class="mt-1 me-2">@item.FirstName @item.LastName</label>
+                    </td>
+                    <td class="mt-1">@item.PhoneNumber</td>
+                    <td class="mt-1">@item.CountOfGet</td>
+                    <td class="mt-1">@item.Name</td>
+                    <td class="mt-1">@item.SaveDateY/@item.SaveDateM/@item.SaveDateD</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

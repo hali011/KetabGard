@@ -172,7 +172,8 @@ function getdatenow() {
             datemonth = "اسفند"
             break;
     }
-    return datenow = jalalidate[2] + " " + datemonth + " " + jalalidate[0];
+    datenow = jalalidate[2] + " " + datemonth + " " + jalalidate[0];
+    return datenow
 }
 
 function loadDashboard() {
@@ -188,7 +189,8 @@ function loadDashboard() {
         .then(data => {
             clearTimeout(timeout);
             $("#loadpartial").html(data);
-            const datenow = getdatenow()
+            loaddashboardtable();
+            const datenow = getdatenow();
             $("#nowdate").append(datenow);
             Cookies.set('state', 'Dashboard');
         })
@@ -275,6 +277,7 @@ function loadAdminpage() {
         .then(data => {
             clearTimeout(timeout);
             $("#loadpartial").html(data);
+            admintableload();
             Cookies.set('state', 'Adminpage');
         })
         .catch(error => {

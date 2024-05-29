@@ -1,7 +1,20 @@
 ﻿@section styles {
     <style>
+        .modal-content {
+            text-align: center;
+        }
+        .modal-body {
+            font-size: 1.2rem;
+        }
+        .modal-body .checkmark {
+            font-size: 3rem;
+            color: #4caf50;
+        }
         #searchbox:focus {
             outline: none
+        }
+        .searchbox:focus {
+            outline: none;
         }
         .button-35:hover {
             border-bottom: 2px solid #525CEB
@@ -45,7 +58,6 @@
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            loadDashboard();
             let state = Cookies.get('state');
             switch (state) {
                 case 'Dashboard':
@@ -69,7 +81,7 @@
                     SelectedAddadmin($('#divAddAdmin'), true)
                     break;
                 default:
-                    loadDashboard()
+                    loadpage(0)
                     selectedmenu($('#Dashboard'), $('#imgdashboard'), $('#txtdashboard'), 0)
                     break;
             }
@@ -101,10 +113,10 @@
     <div class="mt-5 pt-2">
         <div class="bg-secondary rounded-3 row pt-1 pb-1 pe-3 ps-3 m-4">
             <div class="col-3 p-0 pe-1">
-                <img class=" w-75 rounded-circle" src="~/AdminPic/Me.jpg" />
+                <img class=" w-75 rounded-circle" src="@ViewBag.pic" />
             </div>
             <div class="col-8 p-0 me-2">
-                <label class="text-white">مهدی دهقان</label>
+                <label class="text-white">@ViewBag.name</label>
             </div>
         </div>
         <div class="border border-secondary rounded-3 row pt-1 pb-1 pe-3 ps-3 m-4 cursor" id="divAddAdmin" onclick="SelectedAddadmin($('#divAddAdmin'),true)">

@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="KetabGardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Access">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="id" />
@@ -19,6 +26,21 @@
           <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="EducationDegree" Type="int" />
           <Property Name="Picurl" Type="nvarchar(max)" />
+          <Property Name="Access" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Amanat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Date" Type="nvarchar(max)" />
+          <Property Name="Expiredate" Type="nvarchar(max)" />
+          <Property Name="Userid" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Bookid" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Expireday" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Backed" Type="bit" />
         </EntityType>
         <EntityType Name="Books">
           <Key>
@@ -92,36 +114,96 @@
           <Property Name="SaveDateM" Type="numeric" Precision="18" Scale="0" />
           <Property Name="SaveDateY" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Expireactivate" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ActiveTime" Type="nvarchar(max)" />
+          <Property Name="ExpireTime" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'KetabGard.dbo.Adduserpage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'KetabGard.dbo.Amanattable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Amanattable">
+          <Key>
+            <PropertyRef Name="Userid" />
+            <PropertyRef Name="Bookid" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Userid" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Bookid" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="PicURL" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bpicurl" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Expireday" Type="int" />
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Backed" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KetabGard.dbo.DashboardTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DashboardTable">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="PicURL" Type="nvarchar(max)" />
+          <Property Name="SaveDateD" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CountOfGet" Type="int" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaveDateM" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SaveDateY" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Expr1" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="LastBook" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
         <EntityContainer Name="KetabGardModelStoreContainer">
+          <EntitySet Name="Access" EntityType="Self.Access" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Amanat" EntityType="Self.Amanat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EducationDegree" EntityType="Self.EducationDegree" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Amanattable" EntityType="Self.Amanattable" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Amanattable].[Userid] AS [Userid], 
+    [Amanattable].[Bookid] AS [Bookid], 
+    [Amanattable].[FirstName] AS [FirstName], 
+    [Amanattable].[LastName] AS [LastName], 
+    [Amanattable].[PicURL] AS [PicURL], 
+    [Amanattable].[PhoneNumber] AS [PhoneNumber], 
+    [Amanattable].[Name] AS [Name], 
+    [Amanattable].[Bpicurl] AS [Bpicurl], 
+    [Amanattable].[Active] AS [Active], 
+    [Amanattable].[Expireday] AS [Expireday], 
+    [Amanattable].[Id] AS [Id], 
+    [Amanattable].[Backed] AS [Backed]
+    FROM [dbo].[Amanattable] AS [Amanattable]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DashboardTable" EntityType="Self.DashboardTable" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DashboardTable].[FirstName] AS [FirstName], 
+    [DashboardTable].[LastName] AS [LastName], 
+    [DashboardTable].[PicURL] AS [PicURL], 
+    [DashboardTable].[SaveDateD] AS [SaveDateD], 
+    [DashboardTable].[CountOfGet] AS [CountOfGet], 
+    [DashboardTable].[PhoneNumber] AS [PhoneNumber], 
+    [DashboardTable].[SaveDateM] AS [SaveDateM], 
+    [DashboardTable].[SaveDateY] AS [SaveDateY], 
+    [DashboardTable].[Name] AS [Name], 
+    [DashboardTable].[Id] AS [Id], 
+    [DashboardTable].[Expr1] AS [Expr1], 
+    [DashboardTable].[LastBook] AS [LastBook]
+    FROM [dbo].[DashboardTable] AS [DashboardTable]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KetabGardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Mcode" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phonenumber" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EducationDegree" Type="Int32" />
-          <Property Name="Picurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Book">
           <Key>
             <PropertyRef Name="Id" />
@@ -168,13 +250,40 @@ warning 6002: The table/view 'KetabGard.dbo.Adduserpage' does not have a primary
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="KetabGardEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Books" EntityType="Self.Book" />
           <EntitySet Name="EducationDegrees" EntityType="Self.EducationDegree" />
           <EntitySet Name="Genders" EntityType="Self.Gender" />
           <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Accesses" EntityType="KetabGardModel.Access" />
+          <EntitySet Name="Admins" EntityType="KetabGardModel.Admin" />
           <EntitySet Name="Users" EntityType="KetabGardModel.User" />
+          <EntitySet Name="Amanats" EntityType="KetabGardModel.Amanat" />
+          <EntitySet Name="Amanattables" EntityType="KetabGardModel.Amanattable" />
+          <EntitySet Name="DashboardTables" EntityType="KetabGardModel.DashboardTable" />
         </EntityContainer>
+        <EntityType Name="Access">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mcode" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phonenumber" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EducationDegree" Type="Int32" />
+          <Property Name="Picurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Access" Type="Int16" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -202,6 +311,59 @@ warning 6002: The table/view 'KetabGard.dbo.Adduserpage' does not have a primary
           <Property Name="SaveDateM" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="SaveDateY" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Expireactivate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ActiveTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpireTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Amanat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Expiredate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Userid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Bookid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Expireday" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Backed" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Amanattable">
+          <Key>
+            <PropertyRef Name="Userid" />
+            <PropertyRef Name="Bookid" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Userid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Bookid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bpicurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Expireday" Type="Int32" />
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Backed" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DashboardTable">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SaveDateD" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CountOfGet" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SaveDateM" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SaveDateY" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Expr1" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="LastBook" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -209,22 +371,6 @@ warning 6002: The table/view 'KetabGard.dbo.Adduserpage' does not have a primary
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="KetabGardModelStoreContainer" CdmEntityContainer="KetabGardEntities">
-          <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="KetabGardModel.Admin">
-              <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="Mcode" ColumnName="Mcode" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="EducationDegree" ColumnName="EducationDegree" />
-                <ScalarProperty Name="Picurl" ColumnName="Picurl" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="KetabGardModel.Book">
               <MappingFragment StoreEntitySet="Books">
@@ -274,9 +420,36 @@ warning 6002: The table/view 'KetabGard.dbo.Adduserpage' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Accesses">
+            <EntityTypeMapping TypeName="KetabGardModel.Access">
+              <MappingFragment StoreEntitySet="Access">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="KetabGardModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="Picurl" ColumnName="Picurl" />
+                <ScalarProperty Name="EducationDegree" ColumnName="EducationDegree" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Mcode" ColumnName="Mcode" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="KetabGardModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ExpireTime" ColumnName="ExpireTime" />
+                <ScalarProperty Name="ActiveTime" ColumnName="ActiveTime" />
                 <ScalarProperty Name="Expireactivate" ColumnName="Expireactivate" />
                 <ScalarProperty Name="SaveDateY" ColumnName="SaveDateY" />
                 <ScalarProperty Name="SaveDateM" ColumnName="SaveDateM" />
@@ -300,6 +473,57 @@ warning 6002: The table/view 'KetabGard.dbo.Adduserpage' does not have a primary
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Amanats">
+            <EntityTypeMapping TypeName="KetabGardModel.Amanat">
+              <MappingFragment StoreEntitySet="Amanat">
+                <ScalarProperty Name="Backed" ColumnName="Backed" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Expireday" ColumnName="Expireday" />
+                <ScalarProperty Name="Bookid" ColumnName="Bookid" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="Expiredate" ColumnName="Expiredate" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Amanattables">
+            <EntityTypeMapping TypeName="KetabGardModel.Amanattable">
+              <MappingFragment StoreEntitySet="Amanattable">
+                <ScalarProperty Name="Backed" ColumnName="Backed" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Expireday" ColumnName="Expireday" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Bpicurl" ColumnName="Bpicurl" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Bookid" ColumnName="Bookid" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashboardTables">
+            <EntityTypeMapping TypeName="KetabGardModel.DashboardTable">
+              <MappingFragment StoreEntitySet="DashboardTable">
+                <ScalarProperty Name="LastBook" ColumnName="LastBook" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SaveDateY" ColumnName="SaveDateY" />
+                <ScalarProperty Name="SaveDateM" ColumnName="SaveDateM" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CountOfGet" ColumnName="CountOfGet" />
+                <ScalarProperty Name="SaveDateD" ColumnName="SaveDateD" />
+                <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

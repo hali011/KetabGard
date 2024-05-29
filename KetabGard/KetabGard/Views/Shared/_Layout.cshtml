@@ -34,6 +34,26 @@
     <script src="~/Scripts/converter.js"></script>
     <script>
         let timeout;
+        let datathisweak;
+        let datapervuisweak;
+
+        const loaddashboardtable = () => {
+            fetch('/Home/Dashboardtable', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify()
+            })
+                .then(response => response.text())
+                .then(data => {
+                    $("#dashboardtable").html(data);
+                })
+                .catch(error => {
+                    alert("Error")
+                })
+        }
 
         function search(id, str) {
             switch (id) {

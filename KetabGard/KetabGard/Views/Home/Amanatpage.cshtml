@@ -4,7 +4,7 @@
             <div class="col-1 m-0 p-2 pe-3 text-end">
                 <img src="~/Source/Searchicon.png" />
             </div>
-            <input id="searchbox" class="col-10 rounded-2 me0 pe-0" placeholder="جستجو کنید" style="border:0" />
+            <input id="searchbox" class="col-10 border-0 rounded-2 me0 pe-0" placeholder="جستجو کنید" />
         </div>
         <div class="row mt-5">
             <div class="col-2">
@@ -34,18 +34,21 @@
             <div class="p-3 pt-2">
                 <label class="h6" style="color:black"><b>اعضای برتر</b></label>
             </div>
-            <div class="p-2 row">
-                <div class="col-2">
-                    <img class="rounded-2" width="35" height="35" src="~/AdminPic/Me.jpg" />
+            @foreach (var item in ViewBag.bestuser)
+            {
+                <div class="p-2 row">
+                    <div class="col-2">
+                        <img class="rounded-2" width="35" height="35" src="@item.PicURL" />
+                    </div>
+                    <div class="col-6 me-2">
+                        <label style="font-size:12px">@item.FirstName @item.LastName</label>
+                        <label style="font-size:10px">@item.SaveDateY/@item.SaveDateM/@item.SaveDateD</label>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <label>@item.CountOfGet</label>
+                    </div>
                 </div>
-                <div class="col-6 me-2">
-                    <label style="font-size:12px">مهدی دهقان</label>
-                    <label style="font-size:10px">1395/05/06</label>
-                </div>
-                <div class="col-2 mt-2">
-                    <label>125</label>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>

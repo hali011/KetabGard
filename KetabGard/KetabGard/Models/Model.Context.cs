@@ -25,11 +25,15 @@ namespace KetabGard.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<EducationDegree> EducationDegrees { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<Access> Accesses { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Amanat> Amanats { get; set; }
+        public virtual DbSet<Amanattable> Amanattables { get; set; }
+        public virtual DbSet<DashboardTable> DashboardTables { get; set; }
     }
 }

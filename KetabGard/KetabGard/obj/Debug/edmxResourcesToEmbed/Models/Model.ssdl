@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="KetabGardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Access">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Admin">
     <Key>
       <PropertyRef Name="id" />
@@ -14,6 +21,21 @@
     <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="EducationDegree" Type="int" />
     <Property Name="Picurl" Type="nvarchar(max)" />
+    <Property Name="Access" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Amanat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Date" Type="nvarchar(max)" />
+    <Property Name="Expiredate" Type="nvarchar(max)" />
+    <Property Name="Userid" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Bookid" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Expireday" Type="int" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Backed" Type="bit" />
   </EntityType>
   <EntityType Name="Books">
     <Key>
@@ -87,15 +109,90 @@
     <Property Name="SaveDateM" Type="numeric" Precision="18" Scale="0" />
     <Property Name="SaveDateY" Type="numeric" Precision="18" Scale="0" />
     <Property Name="Expireactivate" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="ActiveTime" Type="nvarchar(max)" />
+    <Property Name="ExpireTime" Type="nvarchar(max)" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'KetabGard.dbo.Adduserpage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'KetabGard.dbo.Amanattable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Amanattable">
+    <Key>
+      <PropertyRef Name="Userid" />
+      <PropertyRef Name="Bookid" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Userid" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Bookid" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="PicURL" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Bpicurl" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Expireday" Type="int" />
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Backed" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'KetabGard.dbo.DashboardTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DashboardTable">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Expr1" />
+    </Key>
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="PicURL" Type="nvarchar(max)" />
+    <Property Name="SaveDateD" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="CountOfGet" Type="int" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="SaveDateM" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="SaveDateY" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Expr1" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="LastBook" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
   <EntityContainer Name="KetabGardModelStoreContainer">
+    <EntitySet Name="Access" EntityType="Self.Access" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Amanat" EntityType="Self.Amanat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EducationDegree" EntityType="Self.EducationDegree" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Amanattable" EntityType="Self.Amanattable" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Amanattable].[Userid] AS [Userid], 
+    [Amanattable].[Bookid] AS [Bookid], 
+    [Amanattable].[FirstName] AS [FirstName], 
+    [Amanattable].[LastName] AS [LastName], 
+    [Amanattable].[PicURL] AS [PicURL], 
+    [Amanattable].[PhoneNumber] AS [PhoneNumber], 
+    [Amanattable].[Name] AS [Name], 
+    [Amanattable].[Bpicurl] AS [Bpicurl], 
+    [Amanattable].[Active] AS [Active], 
+    [Amanattable].[Expireday] AS [Expireday], 
+    [Amanattable].[Id] AS [Id], 
+    [Amanattable].[Backed] AS [Backed]
+    FROM [dbo].[Amanattable] AS [Amanattable]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DashboardTable" EntityType="Self.DashboardTable" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DashboardTable].[FirstName] AS [FirstName], 
+    [DashboardTable].[LastName] AS [LastName], 
+    [DashboardTable].[PicURL] AS [PicURL], 
+    [DashboardTable].[SaveDateD] AS [SaveDateD], 
+    [DashboardTable].[CountOfGet] AS [CountOfGet], 
+    [DashboardTable].[PhoneNumber] AS [PhoneNumber], 
+    [DashboardTable].[SaveDateM] AS [SaveDateM], 
+    [DashboardTable].[SaveDateY] AS [SaveDateY], 
+    [DashboardTable].[Name] AS [Name], 
+    [DashboardTable].[Id] AS [Id], 
+    [DashboardTable].[Expr1] AS [Expr1], 
+    [DashboardTable].[LastBook] AS [LastBook]
+    FROM [dbo].[DashboardTable] AS [DashboardTable]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

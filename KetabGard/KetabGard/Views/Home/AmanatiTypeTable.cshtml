@@ -1,40 +1,75 @@
-﻿<table class="table">
-    <thead>
-        <tr>
-            <th class="text-secondary" scope="col">عضو</th>
-            <th class="text-secondary" scope="col">کتاب</th>
-            <th class="text-secondary" scope="col">شماره عضو</th>
-            <th class="text-secondary" scope="col">وضعیت امانتی</th>
-            <th class="text-secondary" scope="col">اخطار پیامکی</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <img class="float-end rounded-circle" style=" height:2rem" src="~/AdminPic/Me.jpg" />
-                <label class="mt-1 me-2">مهدی دهقان</label>
-            </td>
-            <td>
-                <img class="float-end rounded-3" style=" height:2rem" src="~/BookPic/BookPic.png" />
-                <label class="mt-1 me-2">عادت های اتمی</label>
-            </td>
-            <td class="mt-1">09919229334</td>
-            <td class="mt-1 p-1">
-                <label class="rounded-4 p-1" style="background-color: rgba(48,77,48,0.25); color: #304D30">
-                    معتبر ( 15 روز)
-                </label>
-            </td>
-            <td class="pe-4">
-                <img class="cursor" src="~/Source/SmsAlert.png" />
-            </td>
-            <td>
-                <img class="cursor" src="~/Source/Edit.png" />
-            </td>
-            <td>
-                <img class="cursor" src="~/Source/Accept.png" />
-            </td>
-        </tr>
-    </tbody>
-</table>
+﻿@model IEnumerable<KetabGard.Models.Amanattable>
+<div class="table-responsive" style="max-height:400px;overflow-y:auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-secondary" scope="col">عضو</th>
+                <th class="text-secondary" scope="col">کتاب</th>
+                <th class="text-secondary" scope="col">شماره عضو</th>
+                <th class="text-secondary" scope="col">وضعیت امانتی</th>
+                <th class="text-secondary" scope="col">اخطار پیامکی</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img class="float-end rounded-circle" style=" height:2rem; width:2rem" src="@item.PicURL" />
+                        <label class="mt-1 me-2">@item.FirstName @item.LastName</label>
+                    </td>
+                    <td>
+                        <img class="float-end rounded-3" style=" height:2rem; width:2rem" src="@item.Bpicurl" />
+                        <label class="mt-1 me-2">@item.Name</label>
+                    </td>
+                    <td class="mt-1">@item.PhoneNumber</td>
+                    <td class="mt-1 p-1">
+                        @if (item.Active == true && item.Expireday != 0)
+                        {
+                            <label class="rounded-4 p-1" style="background-color: rgba(48,77,48,0.25); color: #304D30">
+                                معتبر ( @item.Expireday روز)
+                            </label>
+                        }
+                        else if (item.Backed == true)
+                        {
+                            <label class="rounded-4 p-1" style="background-color: rgba(48,77,48,0.25); color: #304D30">
+                                تحویل داده شد
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="rounded-4 p-1" style="background-color: rgba(48,77,48,0.25); color: #304D30">
+                                پایان اعتبار
+                            </label>
+                        }
+                    </td>
+                    <td class="pe-4">
+                        <img class="cursor" src="~/Source/SmsAlert.png" />
+                    </td>
+                    <td>
+                        @if (item.Backed == true)
+                        {
+                            <img class="cursor" src="~/Source/Edit.png" />
+                        }
+                        else
+                        {
+                            <img class="cursor" onclick="editamanat(@item.Id)" src="~/Source/Edit.png" />
+                        }
+                    </td>
+                    <td>
+                        @if (item.Backed == true)
+                        {
+                            <img class="cursor" src="~/Source/Accept.png" />
+                        }
+                        else
+                        {
+                            <img class="cursor" onclick="backed(@item.Id)" src="~/Source/Accept.png" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

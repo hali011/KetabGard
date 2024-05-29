@@ -25,7 +25,6 @@ const newgenre = () => {
     }
 }
 const cancelnewgenrebtn = () => {
-    debugger;
     $("#genreselect").show();
     $("#newgenreinput").hide();
     $("#cancelnewgenre").hide();

@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<KetabGard.Models.Book>
-<table class="table">
-    <thead>
-        <tr>
-            <th class="text-secondary" scope="col">کتاب</th>
-            <th class="text-secondary" scope="col">نام نویسنده</th>
-            <th class="text-secondary" scope="col">دسته بندی</th>
-            <th class="text-secondary" scope="col">سال انتشار</th>
-            <th class="text-secondary" scope="col">تعداد به امانت برده شده</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="table-responsive" style="max-height:400px;overflow-y:auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-secondary" scope="col">کتاب</th>
+                <th class="text-secondary" scope="col">نام نویسنده</th>
+                <th class="text-secondary" scope="col">دسته بندی</th>
+                <th class="text-secondary" scope="col">سال انتشار</th>
+                <th class="text-secondary" scope="col">تعداد به امانت برده شده</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -39,5 +40,6 @@
 
                 </tr>
             }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

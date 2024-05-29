@@ -1,4 +1,6 @@
 ﻿<div class="row">
+    <input hidden id="datathisweek" value="@ViewBag.thisweak" />
+    <input hidden id="dataprweek" value="@ViewBag.prweak" />
      <div class="col-10 p-5">
          <div class="row m-3 ms-0 me-0 rounded-3 ps-0 pe-0 border border-2 border-secondary">
              <div class="col-1 m-0 p-2 pe-3 text-end"> 
@@ -7,32 +9,48 @@
              <input id="searchbox" class="col-10 rounded-2 me0 pe-0" placeholder="جستجو کنید" style="border:0" />
          </div>
          <div>
-             <img class="w-100" src="~/Source/Amar.png"/>
+             <div>
+                 <div>
+                     <label><b style="opacity:0.54">میانگین ثبت نام این ماه</b></label>
+                 </div>
+                 <div>
+                     <label><b>@ViewBag.avrage</b></label>
+                 </div>
+             </div>
+             <div class="row">
+                 <div class="col-9">
+                     <canvas id="myChart" height="100"></canvas>
+                 </div>
+                 <div class="col-1"></div>
+                 <div class="col-2">
+                     <div class="mt-3 p-2 rounded-3 text-center" style="background-color:rgba(61,59,64,0.1)">
+                         <label style="font-size:12px;">اعضای کل</label>
+                         <label><b>@ViewBag.userscount</b></label>
+                     </div>
+                     <div class="mt-4 p-2 rounded-3 text-center" style="background-color:rgba(61,59,64,0.1)">
+                         <label style="font-size:12px;">کل امانتیا</label>
+                         <label><b>@ViewBag.amanatcount</b></label>
+                     </div>
+                     <div class="mt-4 p-2 rounded-3 text-center" style="background-color:rgba(61,59,64,0.1)">
+                         <label style="font-size:12px; color:rgba(255,69,69,0.88)">امانتی آورده نشده</label>
+                         <label style="color: rgba(255,69,69,0.88)"><b>@ViewBag.amanatnotbackcount</b></label>
+                     </div>
+                 </div>
+             </div>
          </div>
-         <div>
-             <table class="table">
-                 <thead>
-                     <tr>
-                         <th class="text-secondary" scope="col">عضو</th>
-                         <th class="text-secondary" scope="col">شماره</th>
-                         <th class="text-secondary" scope="col">تعداد کتاب خوانده شده</th>
-                         <th class="text-secondary" scope="col">آخرین کتاب خوانده شده</th>
-                         <th class="text-secondary" scope="col">تاریخ عضویت</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     <tr>
-                         <td>
-                            <img class="float-end rounded-circle" style=" height:2rem" src="~/AdminPic/Me.jpg" />
-                            <label class="mt-1 me-2">مهدی دهقان</label>
-                         </td>
-                         <td class="mt-1">09919229334</td>
-                         <td class="mt-1">136</td>
-                         <td class="mt-1">رویای جنگ</td>
-                         <td class="mt-1">1395/05/06</td>
-                     </tr>
-                 </tbody>
-             </table>
+         <div class="row">
+             <div class="col-2">
+                 <label class="h6"><b>فعال ترین کاربران</b></label>
+             </div>
+             <div class="col-8"></div>
+             <div class="col-2">
+                 <select class="dropdown form-check border-0" style="background-color:rgba(249,249,249,1)">
+                     <option>این هفته</option>
+                 </select>
+             </div>
+         </div>
+         <div id="dashboardtable">
+             
          </div>
      </div>
      <div class="col-2 ps-0">
@@ -56,3 +74,39 @@
          </div>
      </div>
 </div>
+<script>
+    datathisweak = $("#datathisweek").val().split(" ");
+    datapervuisweak = $("#dataprweek").val().split(" ");
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['1', '2', '3', '4', '5', '6', '7'],
+            datasets: [
+                {
+                    label: 'این هفته',
+                    data: [Number(datathisweak[0]), Number(datathisweak[1]), Number(datathisweak[2]), Number(datathisweak[3]), Number(datathisweak[4]), Number(datathisweak[5]), Number(datathisweak[6])],
+                    backgroundColor: 'rgba(249, 65, 68, 0.2)',
+                    borderColor: 'rgba(249, 65, 68, 1)',
+                    borderWidth: 1,
+                    fill: true
+                },
+                {
+                    label: 'هفته قبل',
+                    data: [Number(datapervuisweak[0]), Number(datapervuisweak[1]), Number(datapervuisweak[2]), Number(datapervuisweak[3]), Number(datapervuisweak[4]), Number(datapervuisweak[5]), Number(datapervuisweak[6])],
+                    backgroundColor: 'rgba(249, 199, 79, 0.2)',
+                    borderColor: 'rgba(249, 199, 79, 1)',
+                    borderWidth: 1,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

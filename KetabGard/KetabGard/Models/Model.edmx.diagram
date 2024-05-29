@@ -4,13 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="098ac01ff59942d2a46750c6ef0d8255" Name="Diagram1">
-        <EntityTypeShape EntityType="KetabGardModel.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="098ac01ff59942d2a46750c6ef0d8255" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="KetabGardModel.Book" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KetabGardModel.EducationDegree" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KetabGardModel.Gender" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KetabGardModel.Gender" Width="1.5" PointX="4.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="KetabGardModel.Genre" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KetabGardModel.User" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KetabGardModel.Access" Width="1.5" PointX="6.75" PointY="2.5" />
+        <EntityTypeShape EntityType="KetabGardModel.Admin" Width="1.5" PointX="0.875" PointY="1" />
+        <EntityTypeShape EntityType="KetabGardModel.User" Width="1.5" PointX="8.875" PointY="0.75" />
+        <EntityTypeShape EntityType="KetabGardModel.Amanat" Width="1.5" PointX="13.375" PointY="0.625" />
+        <EntityTypeShape EntityType="KetabGardModel.Amanattable" Width="1.5" PointX="11" PointY="0.75" />
+        <EntityTypeShape EntityType="KetabGardModel.DashboardTable" Width="1.5" PointX="15.5" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

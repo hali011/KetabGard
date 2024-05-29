@@ -1,20 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="KetabGardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Admin">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Mcode" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Phonenumber" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="EducationDegree" Type="Int32" />
-    <Property Name="Picurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="Book">
     <Key>
       <PropertyRef Name="Id" />
@@ -61,13 +46,40 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="KetabGardEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Admins" EntityType="Self.Admin" />
     <EntitySet Name="Books" EntityType="Self.Book" />
     <EntitySet Name="EducationDegrees" EntityType="Self.EducationDegree" />
     <EntitySet Name="Genders" EntityType="Self.Gender" />
     <EntitySet Name="Genres" EntityType="Self.Genre" />
+    <EntitySet Name="Accesses" EntityType="KetabGardModel.Access" />
+    <EntitySet Name="Admins" EntityType="KetabGardModel.Admin" />
     <EntitySet Name="Users" EntityType="KetabGardModel.User" />
+    <EntitySet Name="Amanats" EntityType="KetabGardModel.Amanat" />
+    <EntitySet Name="Amanattables" EntityType="KetabGardModel.Amanattable" />
+    <EntitySet Name="DashboardTables" EntityType="KetabGardModel.DashboardTable" />
   </EntityContainer>
+  <EntityType Name="Access">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Mcode" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phonenumber" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EducationDegree" Type="Int32" />
+    <Property Name="Picurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Access" Type="Int16" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
@@ -95,5 +107,58 @@
     <Property Name="SaveDateM" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="SaveDateY" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="Expireactivate" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ActiveTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpireTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Amanat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expiredate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Userid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Bookid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Expireday" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Backed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Amanattable">
+    <Key>
+      <PropertyRef Name="Userid" />
+      <PropertyRef Name="Bookid" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Userid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Bookid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bpicurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Expireday" Type="Int32" />
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Backed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DashboardTable">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Expr1" />
+    </Key>
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SaveDateD" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CountOfGet" Type="Int32" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SaveDateM" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SaveDateY" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Expr1" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="LastBook" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
 </Schema>

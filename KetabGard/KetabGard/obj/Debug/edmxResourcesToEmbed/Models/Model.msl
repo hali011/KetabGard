@@ -1,22 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="KetabGardModelStoreContainer" CdmEntityContainer="KetabGardEntities">
-    <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="KetabGardModel.Admin">
-        <MappingFragment StoreEntitySet="Admin">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-          <ScalarProperty Name="Mcode" ColumnName="Mcode" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="EducationDegree" ColumnName="EducationDegree" />
-          <ScalarProperty Name="Picurl" ColumnName="Picurl" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Books">
       <EntityTypeMapping TypeName="KetabGardModel.Book">
         <MappingFragment StoreEntitySet="Books">
@@ -66,9 +50,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Accesses">
+      <EntityTypeMapping TypeName="KetabGardModel.Access">
+        <MappingFragment StoreEntitySet="Access">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="KetabGardModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Access" ColumnName="Access" />
+          <ScalarProperty Name="Picurl" ColumnName="Picurl" />
+          <ScalarProperty Name="EducationDegree" ColumnName="EducationDegree" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Mcode" ColumnName="Mcode" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="KetabGardModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ExpireTime" ColumnName="ExpireTime" />
+          <ScalarProperty Name="ActiveTime" ColumnName="ActiveTime" />
           <ScalarProperty Name="Expireactivate" ColumnName="Expireactivate" />
           <ScalarProperty Name="SaveDateY" ColumnName="SaveDateY" />
           <ScalarProperty Name="SaveDateM" ColumnName="SaveDateM" />
@@ -92,6 +103,57 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Amanats">
+      <EntityTypeMapping TypeName="KetabGardModel.Amanat">
+        <MappingFragment StoreEntitySet="Amanat">
+          <ScalarProperty Name="Backed" ColumnName="Backed" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Expireday" ColumnName="Expireday" />
+          <ScalarProperty Name="Bookid" ColumnName="Bookid" />
+          <ScalarProperty Name="Userid" ColumnName="Userid" />
+          <ScalarProperty Name="Expiredate" ColumnName="Expiredate" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Amanattables">
+      <EntityTypeMapping TypeName="KetabGardModel.Amanattable">
+        <MappingFragment StoreEntitySet="Amanattable">
+          <ScalarProperty Name="Backed" ColumnName="Backed" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Expireday" ColumnName="Expireday" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Bpicurl" ColumnName="Bpicurl" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Bookid" ColumnName="Bookid" />
+          <ScalarProperty Name="Userid" ColumnName="Userid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DashboardTables">
+      <EntityTypeMapping TypeName="KetabGardModel.DashboardTable">
+        <MappingFragment StoreEntitySet="DashboardTable">
+          <ScalarProperty Name="LastBook" ColumnName="LastBook" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SaveDateY" ColumnName="SaveDateY" />
+          <ScalarProperty Name="SaveDateM" ColumnName="SaveDateM" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="CountOfGet" ColumnName="CountOfGet" />
+          <ScalarProperty Name="SaveDateD" ColumnName="SaveDateD" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

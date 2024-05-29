@@ -24,5 +24,6 @@ namespace KetabGard.Models
         public string Password { get; set; }
         public Nullable<int> EducationDegree { get; set; }
         public string Picurl { get; set; }
+        public Nullable<short> Access { get; set; }
     }
 }

@@ -2,14 +2,76 @@
     <label class="h5"><b>@ViewBag.serachof</b></label>
 </div>
 <div class="p-2 row">
-    <div class="col-2">
-        <img src="~/BookPic/BookPic.png" />
-    </div>
-    <div class="col-6 me-2">
-        <label style="font-size:14px">عادت های اتمی</label>
-        <label style="font-size:10px">جیمز کلیر</label>
-    </div>
-    <div class="col-2 mt-2">
-        <label>136</label>
-    </div>
+    @if (ViewBag.books != null && ViewBag.books.Count != 0)
+    {
+        foreach (var item in ViewBag.books)
+        {
+            if (item.Here)
+            {
+                var jsonItem = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(item));
+                <div class="col-2 cursor" onclick='selectedbook(@jsonItem)'>
+                    <img style="height:2rem;width:2rem;" src="@item.PicURL" />
+                </div>
+                <div class="col-6 me-2">
+                    <label style="font-size:14px">@item.Name</label>
+                    <label style="font-size:10px">@item.Writer</label>
+                </div>
+                <div class="col-2">
+                    <label style="font-size:14px">موجود است</label>
+                </div>
+            }
+            else
+            {
+                <div class="col-2">
+                    <img style="height:2rem;width:2rem;" src="@item.PicURL" />
+                </div>
+                <div class="col-6 me-2">
+                    <label style="font-size:14px">@item.Name</label>
+                    <label style="font-size:10px">@item.Writer</label>
+                </div>
+                <div class="col-2">
+                    <label style="font-size:14px">موجود نیست</label>
+                </div>
+            }
+
+        }
+    }
+    else if (ViewBag.users != null && ViewBag.users.Count != 0)
+    {
+        foreach (var item in ViewBag.users)
+        {
+            if (item.Active)
+            {
+                var jsonItem = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(item));
+                <div class="col-2 cursor" onclick='selecteduser(@jsonItem)'>
+                    <img style="height:2rem;width:2rem;" src="@item.PicURL" />
+                </div>
+                <div class="col-6 me-2">
+                    <label style="font-size:14px">@item.FirstName @item.LastName</label>
+                    <label style="font-size:10px">@item.PhoneNumber</label>
+                </div>
+                <div class="col-2">
+                    <label style="font-size:14px">فعال است</label>
+                </div>
+            }
+            else
+            {
+                <div class="col-2">
+                    <img style="height:2rem;width:2rem;" src="@item.PicURL" />
+                </div>
+                <div class="col-6 me-2">
+                    <label style="font-size:14px">@item.FirstName @item.LastName</label>
+                    <label style="font-size:10px">@item.PhoneNumber</label>
+                </div>
+                <div class="col-2">
+                    <label style="font-size:14px">غیرفعال است</label>
+                </div>
+            }
+
+        }
+    }
+    else
+    {
+        <label>موردی یافت نشد</label>
+    }
 </div>

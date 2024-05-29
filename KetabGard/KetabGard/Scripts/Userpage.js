@@ -185,3 +185,67 @@ function useredit(id) {
             alert("Error")
         })
 }
+
+const activeuserfordays = (id,self) => {
+    let date = getdatenow()
+    date = date.split(" ")
+
+    let day = Number(date[0]);
+    let month;
+    let year = Number(date[2]);
+    switch (date[1]) {
+        case "فروردین":
+            month = 1;
+            break;
+        case "اردیبهشت":
+            month = 2;
+            break;
+        case "خرداد":
+            month = 3;
+            break;
+        case "تیر":
+            month = 4;
+            break;
+        case "مرداد":
+            month = 5;
+            break;
+        case "شهریور":
+            month = 6;
+            break;
+        case "مهر":
+            month = 7;
+            break;
+        case "آبان":
+            month = 8;
+            break;
+        case "آذر":
+            month = 9;
+            break;
+        case "دی":
+            month = 10;
+            break;
+        case "بهمن":
+            month = 11;
+            break;
+        case "اسفند":
+            month = 12;
+            break;
+    }
+    fetch('/Home/calculateexpiredate', {
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id, day: day, month: month, year: year })
+    })
+        .then(response => response.text())
+        .then(data => {
+            let parsedata = JSON.parse(data);
+            self.style.backgroundColor = "rgba(48,77,48,0.25)";
+            self.innerText = parsedata.result;
+        })
+        .catch(error => {
+            alert("Error")
+        })
+}
