@@ -31,6 +31,7 @@ namespace KetabGard.Controllers
             {
                 ViewBag.pic = Sadmin.Picurl;
                 ViewBag.name = Sadmin.Name + " " + Sadmin.Lastname;
+                ViewBag.id = Sadmin.id;
                 return View();
             }
             else
@@ -174,6 +175,8 @@ namespace KetabGard.Controllers
                     users = users.OrderBy(o => o.CountOfGet).ToList();
                     break;
             }
+            var sAdmin = Session["Admin"] as Admin;
+            ViewBag.adminaccess = sAdmin.Access;
             return PartialView(users);
 
         }
@@ -251,7 +254,7 @@ namespace KetabGard.Controllers
                 using (KetabGardEntities db = new KetabGardEntities())
                 {
                     var duser = db.Users.Where(w=>w.Id == user.Id).SingleOrDefault();
-                    duser.FirstName = user.FirstName; duser.LastName = user.LastName; duser.Email = user.Email; duser.PhoneNumber = user.PhoneNumber; duser.FatherName = user.FatherName; duser.MdliCode = user.MdliCode; duser.EducationDegree = user.EducationDegree; duser.Gender = user.Gender;
+                    duser.FirstName = user.FirstName; duser.LastName = user.LastName; duser.Email = user.Email; duser.PhoneNumber = user.PhoneNumber; duser.FatherName = user.FatherName; duser.MdliCode = user.MdliCode; duser.EducationDegree = user.EducationDegree; duser.Gender = user.Gender; duser.PicURL = user.PicURL;
                     db.Entry(duser).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     Confirm = true;
@@ -293,6 +296,8 @@ namespace KetabGard.Controllers
                 genre = db.Genres.ToList();
                 books = db.Books.ToList();
             }
+            var sAdmin = Session["Admin"] as Admin;
+            ViewBag.adminaccess = sAdmin.Access;
             ViewBag.bgenre = genre;
             return PartialView(books);
         }
@@ -416,6 +421,8 @@ namespace KetabGard.Controllers
                     }
                 break;
             }
+            var sAdmin = Session["Admin"] as Admin;
+            ViewBag.adminaccess = sAdmin.Access;
             return PartialView(amanat);
         }
         public ActionResult Addamanatipage(string id)
@@ -602,6 +609,8 @@ namespace KetabGard.Controllers
                 admins = db.Admins.ToList();
                 access = db.Accesses.ToList();
             }
+            var sAdmin = Session["Admin"] as Admin;
+            ViewBag.adminaccess = sAdmin.Access;
             ViewBag.accesses = access;
             return PartialView(admins);
         }
@@ -1239,6 +1248,13 @@ namespace KetabGard.Controllers
                 return Json(new { success = true, result = result });
             }
             
+        }
+
+        public JsonResult exit(int id)
+        {
+            Session.Clear();
+            Session.Abandon();
+            return Json(new { success = false });
         }
         #endregion
 

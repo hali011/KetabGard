@@ -37,13 +37,16 @@
                         }
                     </td>
                     <td class="mt-1">@item.SaveDateY/@(item.SaveDateM > 10 ? item.SaveDateM : "0"+ item.SaveDateM)/@(item.SaveDateD > 10 ? item.SaveDateD : "0"+ item.SaveDateD)</td>
-                    <td>
-                        <img class="cursor" onclick="useredit(@item.Id)" src="~/Source/Edit.png" />
-                    </td>
-                    <td>
-                        <img class="cursor" onclick="userdelete(@item.Id)" src="~/Source/RemoveUsers.png" />
-                    </td>
-                </tr>
+                    @if (ViewBag.adminaccess == 1)
+                    {
+                        <td>
+                            <img class="cursor" onclick="useredit(@item.Id)" src="~/Source/Edit.png" />
+                        </td>
+                        <td>
+                            <img class="cursor" onclick="userdelete(@item.Id)" src="~/Source/RemoveUsers.png" />
+                        </td>
+                    }
+                    </tr>
             }
         </tbody>
     </table>

@@ -113,7 +113,7 @@
     <div class="mt-5 pt-2">
         <div class="bg-secondary rounded-3 row pt-1 pb-1 pe-3 ps-3 m-4">
             <div class="col-3 p-0 pe-1">
-                <img class=" w-75 rounded-circle" src="@ViewBag.pic" />
+                <img style="width:30px; height:30px" class=" rounded-circle" src="@ViewBag.pic" />
             </div>
             <div class="col-8 p-0 me-2">
                 <label class="text-white">@ViewBag.name</label>
@@ -132,7 +132,7 @@
                 <img class=" w-75" src="~/Source/Exit.png" />
             </div>
             <div class="col-8 me-2">
-                <label class="text-danger cursor">خروج</label>
+                <label class="text-danger cursor" onclick="exit(@ViewBag.id)">خروج</label>
             </div>
         </div>
     </div>

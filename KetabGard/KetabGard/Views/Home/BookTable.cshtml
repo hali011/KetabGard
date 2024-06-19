@@ -31,14 +31,16 @@
 
                     <td class="mt-1">@item.YearofPublication</td>
                     <td class="mt-1">@item.GetCount</td>
-                    <td>
-                        <img class="cursor" onclick="editbook(@item.Id)" src="~/Source/EditBook.png" />
-                    </td>
-                    <td>
-                        <img class="cursor" onclick="delbook(@item.Id)" src="~/Source/DelBook.png" />
-                    </td>
-
-                </tr>
+                    @if (ViewBag.adminaccess == 1)
+                    {
+                        <td>
+                            <img class="cursor" onclick="editbook(@item.Id)" src="~/Source/EditBook.png" />
+                        </td>
+                        <td>
+                            <img class="cursor" onclick="delbook(@item.Id)" src="~/Source/DelBook.png" />
+                        </td>
+                    }
+                    </tr>
             }
         </tbody>
     </table>

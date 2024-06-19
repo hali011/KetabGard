@@ -284,3 +284,21 @@ function loadAdminpage() {
             alert("Error")
         })
 }
+function exit(id) {
+    id = parseFloat(id)
+    fetch('/Home/exit', {
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+        .then(response => response.text())
+        .then(data => {
+            window.location.href = '/Home/Login'
+        })
+        .catch(error => {
+            alert("Error")
+        })
+}

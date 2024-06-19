@@ -35,13 +35,16 @@
                             }
                         }
                     </td>
-                    <td>
-                        <img class="cursor" onclick="editadmin(@item.id)" src="~/Source/Edit.png" />
-                    </td>
-                    <td>
-                        <img class="cursor" onclick="deladmin(@item.id)" src="~/Source/RemoveUsers.png" />
-                    </td>
-                </tr>
+                    @if (ViewBag.adminaccess == 1)
+                    {
+                        <td>
+                            <img class="cursor" onclick="editadmin(@item.id)" src="~/Source/Edit.png" />
+                        </td>
+                        <td>
+                            <img class="cursor" onclick="deladmin(@item.id)" src="~/Source/RemoveUsers.png" />
+                        </td>
+                    }
+                    </tr>
             }
         </tbody>
     </table>

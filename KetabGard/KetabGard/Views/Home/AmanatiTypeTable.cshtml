@@ -48,26 +48,35 @@
                     <td class="pe-4">
                         <img class="cursor" src="~/Source/SmsAlert.png" />
                     </td>
-                    <td>
-                        @if (item.Backed == true)
-                        {
-                            <img class="cursor" src="~/Source/Edit.png" />
-                        }
-                        else
-                        {
-                            <img class="cursor" onclick="editamanat(@item.Id)" src="~/Source/Edit.png" />
-                        }
-                    </td>
-                    <td>
-                        @if (item.Backed == true)
-                        {
-                            <img class="cursor" src="~/Source/Accept.png" />
-                        }
-                        else
-                        {
-                            <img class="cursor" onclick="backed(@item.Id)" src="~/Source/Accept.png" />
-                        }
-                    </td>
+                    @if (ViewBag.adminaccess == 1)
+                    {
+                        <td>
+                            @if (item.Backed == true)
+                            {
+                                <img class="cursor" src="~/Source/Edit.png" />
+                            }
+                            else
+                            {
+                                <img class="cursor" onclick="editamanat(@item.Id)" src="~/Source/Edit.png" />
+                            }
+                        </td>
+                        <td>
+                            @if (item.Backed == true)
+                            {
+                                <img class="cursor" src="~/Source/Accept.png" />
+                            }
+                            else
+                            {
+                                <img class="cursor" onclick="backed(@item.Id)" src="~/Source/Accept.png" />
+                            }
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                    }
+
                 </tr>
             }
         </tbody>
