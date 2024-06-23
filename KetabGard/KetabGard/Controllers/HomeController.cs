@@ -169,10 +169,10 @@ namespace KetabGard.Controllers
                     users = users.OrderBy(o => o.Id).ToList();
                     break;
                 case 1:
-                    users = users.OrderByDescending(o => o.CountOfGet).ToList();
+                    users = users.Where(o => o.Active == true).OrderByDescending(o=> o.Expireactivate).ToList();
                     break;
                 case 2:
-                    users = users.OrderBy(o => o.CountOfGet).ToList();
+                    users = users.Where(o => o.Active == false).ToList();
                     break;
             }
             var sAdmin = Session["Admin"] as Admin;
@@ -411,13 +411,13 @@ namespace KetabGard.Controllers
                 case 1:
                     using (KetabGardEntities db = new KetabGardEntities())
                     {
-                        amanat = db.Amanattables.OrderByDescending(o => o.Active == true).ToList();
+                        amanat = db.Amanattables.Where(o => o.Active == true && o.Expireday >= 1).ToList();
                     }
                 break;
                 case 2:
                     using (KetabGardEntities db = new KetabGardEntities())
                     {
-                        amanat = db.Amanattables.OrderBy(o => o.Backed == null).ToList();
+                        amanat = db.Amanattables.Where(o => o.Backed != true && o.Backed != null).ToList();
                     }
                 break;
             }
